@@ -9,11 +9,11 @@
             </v-sheet>
 
             <v-sheet class="d-flex flex-0-1 pa-14">
-                <RouterLink to="/login">
-                    <v-btn id="login" class="ma-2">Cadastre-se</v-btn>
-                </RouterLink>
                 <RouterLink to="/cadastro">
-                    <v-btn id="register" class="ma-2">Acessar</v-btn>
+                    <v-btn id="register" class="ma-2">Cadastre-se</v-btn>
+                </RouterLink>
+                <RouterLink to="/login">
+                    <v-btn id="login" class="ma-2">Acessar</v-btn>
                 </RouterLink>
             </v-sheet>
         </v-sheet>
