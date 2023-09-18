@@ -20,7 +20,7 @@
                         </v-text-field>
                         <v-text-field label="Confirme sua Senha" :rules="[required]" variant="outlined">
                         </v-text-field>
-                        <v-btn block class="mt-6" type="submit" :disabled="!form">Cadastre-se</v-btn>
+                        <v-btn block class="mt-6 btn-positive-action" type="submit">Cadastre-se</v-btn>
                     </v-form>
                 </div>
             </v-sheet>
