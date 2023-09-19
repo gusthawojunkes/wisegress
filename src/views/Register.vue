@@ -28,13 +28,21 @@
                 </div>
             </v-sheet>
         </v-sheet>
+        <v-snackbar v-model="snackbar" :timeout="1000" :color="alertColor" variant="tonal">
+            {{ alertMsg }}
+        </v-snackbar>
     </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
     name: 'Register',
     data() {
         return {
+            snackbar: false,
+            alertMsg: '',
+            alertColor: '',
             form: false,
             name: '',
             date: '',
@@ -52,10 +60,27 @@ export default {
         }
     },
     methods: {
-        onSubmit() {
-            this.$router.push('/login')
+        async onSubmit() {
+            try {
+                // await axios.get('')
+
+                this.snackbar = true
+                this.alertColor = 'success'
+                this.alertMsg = 'Usuário cadastrado com sucesso!'
+
+                await this.onRegister()
+            } catch (error) {
+                this.snackbar = true
+                this.alertColor = 'error'
+                this.alertMsg = 'Erro ao cadastrar usuário!'
+            }
         },
-    }
+        async onRegister() {
+            setTimeout(() => {
+                this.$router.push('/login')
+            }, 1000)
+        }
+    },
 }
 </script>
 <style scoped></style>
