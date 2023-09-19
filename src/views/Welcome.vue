@@ -3,8 +3,8 @@
         <v-sheet class="d-flex flex-wrap h-screen">
             <v-sheet class="d-flex flex-1-0 align-end pa-14">
                 <div>
-                    <p class="text-h5">Bem Vindo ao</p>
-                    <p class="text-h1">Wisegress</p>
+                    <h5 class="text-h5">Bem Vindo ao</h5>
+                    <h1 class="text-h1">Wisegress</h1>
                 </div>
             </v-sheet>
 
