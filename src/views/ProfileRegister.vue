@@ -1,29 +1,25 @@
 <template>
-    <div>
-        <Questions :variants="variants"></Questions>
-    </div>
+    <v-container class="h-screen" h-100 fluid>
+        <!-- <v-row class="text-center">
+            <v-col cols="12"> -->
+        <Question :question="questions[0]"></Question>
+        <h6>{{ "Sua colaboração é fundamental para um começo bem-sucedido com o Wisegress." }}</h6>
+        <!-- </v-col>
+        </v-row> -->
+    </v-container>
 </template>
 
 <script>
-import Questions from '../components/Question.vue'
+import Question from '../components/Question.vue'
 
 export default {
     name: 'ProfileRegister',
     data() {
         return {
-            variants: [
-                'primary',
-                'secondary',
-                'accent',
-                'error',
-                'warning',
-                'info',
-                'success'
-            ],
             questions: [{
-                "question": "Quais são seus planos para usar o Wisegress?",
+                "name": "Quais são seus planos para usar o Wisegress?",
                 "answers": [{
-                    "icon": "book",
+                    "icon": "mdiBookOpenBlankVariant",
                     "title": "Estudo"
                 },
                 {
@@ -37,7 +33,7 @@ export default {
     methods: {
     },
     components: {
-        Questions
+        Question
     }
 }
 </script>
