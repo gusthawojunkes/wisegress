@@ -47,39 +47,7 @@ export default {
                 }
                 ],
                 "answer": null
-            }, {
-                "name": "Qual é o seu nível de conhecimento em inglês?",
-                "answers": [{
-                    "icon": "mdiBookOpenBlankVariant",
-                    "title": "Básico"
-                },
-                {
-                    "icon": "mdiLaptop",
-                    "title": "Intermediário"
-                },
-                {
-                    "icon": "mdiLaptop",
-                    "title": "Avançado"
-                }
-                ],
-                "answer": null
-            }, {
-                "name": "Qual é o seu nível de conhecimento em programação?",
-                "answers": [{
-                    "icon": "mdiBookOpenBlankVariant",
-                    "title": "Básico"
-                },
-                {
-                    "icon": "mdiLaptop",
-                    "title": "Intermediário"
-                },
-                {
-                    "icon": "mdiLaptop",
-                    "title": "Avançado"
-                }
-                ],
-                "answer": null
-            }]
+            },]
         }
     },
     components: {
