@@ -1,5 +1,5 @@
 <template>
-    <v-container class="h-100 d-flex align-center w-50 h-100">
+    <v-container class="h-100 d-flex align-center h-100">
         <v-col>
             <v-row justify="center">
                 <v-dialog v-model="dialog" class="w-50">
@@ -41,17 +41,19 @@
                 </v-dialog>
             </v-row>
             <div v-for="task in tasks" :key="task.uuid">
-                <Task v-if="!task.done" :task="task" @taskDone="taskDone" @taskEdit="selectTask" />
+                <TodoItem v-if="!task.done" :task="task" @taskDone="taskDone" @taskEdit="selectTask" />
             </div>
         </v-col>
     </v-container>
 </template>
   
 <script>
-import Task from '@/components/Task.vue'
+import TodoItem from '@/components/TodoItem.vue'
 
 export default {
     name: 'TodoList',
+    props: {
+    },
     data() {
         return {
             form: false,
@@ -133,7 +135,7 @@ export default {
         }
     },
     components: {
-        Task
+        TodoItem
     },
     created() {
         this.getTasks()

@@ -3,7 +3,8 @@ import Welcome from '../views/Welcome.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import ProfileRegister from '../views/ProfileRegister.vue'
-import TodoList from '../views/TodoList.vue'
+import TodoListView from '../views/TodoListView.vue'
+import Pomodoro from '../views/Pomodoro.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,7 +32,12 @@ const router = createRouter({
     {
       path: '/lista-tarefas',
       name: 'TodoList',
-      component: TodoList
+      component: TodoListView
+    },
+    {
+      path: '/pomodoro',
+      name: 'Pomodoro',
+      component: Pomodoro
     }
   ]
 })
