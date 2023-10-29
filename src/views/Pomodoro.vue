@@ -1,6 +1,6 @@
 <template>
     <v-container class="h-screen d-flex align-center w-50">
-        <v-col cols="6" class="text-center">
+        <v-col cols="4" class="text-center">
             <v-row class="d-flex align-center justify-center mb-6">
                 <h1 class="text-h1">{{ minutes }}:{{ seconds }}</h1>
             </v-row>
@@ -16,12 +16,14 @@
                     @click="switchTime()"></v-btn>
             </v-row>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="8" class="ml-12">
+            <TodoList />
         </v-col>
     </v-container>
 </template>
 
 <script>
+import TodoList from '@/components/TodoList.vue';
 export default {
     name: 'Pomodoro',
     data() {
@@ -78,6 +80,9 @@ export default {
     },
     mounted() {
         setInterval(this.updateTime, 1000);
+    },
+    components: {
+        TodoList,
     },
 };
 </script>

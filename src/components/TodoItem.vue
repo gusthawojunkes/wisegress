@@ -27,7 +27,7 @@
 import SvgIcon from '@jamescoyle/vue-icon';
 import * as md from '@mdi/js';
 export default {
-    name: 'Task',
+    name: 'TodoItem',
     props: {
         task: {
             type: Object,
