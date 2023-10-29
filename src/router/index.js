@@ -3,6 +3,7 @@ import Welcome from '../views/Welcome.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import ProfileRegister from '../views/ProfileRegister.vue'
+import TodoList from '../views/TodoList.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/cadastro-perfil',
       name: 'ProfileRegister',
       component: ProfileRegister
+    },
+    {
+      path: '/lista-tarefas',
+      name: 'TodoList',
+      component: TodoList
     }
   ]
 })
