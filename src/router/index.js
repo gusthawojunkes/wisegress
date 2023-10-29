@@ -12,33 +12,45 @@ const router = createRouter({
     {
       path: '/',
       name: 'Welcome',
-      component: Welcome
+      component: Welcome,
+      icon: 'mdiHome'
     },
     {
       path: '/cadastro',
       name: 'Register',
-      component: Register
+      component: Register,
+      icon: 'mdiAccountCircle'
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      icon: 'mdiLogin'
     },
     {
       path: '/cadastro-perfil',
       name: 'ProfileRegister',
-      component: ProfileRegister
+      component: ProfileRegister,
+      icon: 'mdiAccountFileText'
     },
     {
       path: '/lista-tarefas',
       name: 'TodoList',
-      component: TodoListView
+      component: TodoListView,
+      icon: 'mdiListBoxOutline'
     },
     {
       path: '/pomodoro',
       name: 'Pomodoro',
-      component: Pomodoro
-    }
+      component: Pomodoro,
+      icon: 'mdiClockOutline'
+    },
+    // {
+    //   path: 'kanban',
+    //   name: 'Kanban',
+    //   component: Kanban,
+    //   icon: 'mdiDeveloperBoard'
+    // }
   ]
 })
 
