@@ -3,15 +3,13 @@
         <v-layout>
             <v-navigation-drawer expand-on-hover rail color="#47667B">
                 <v-list>
-                    <v-list-item prepend-avatar="W" title="Wisegress"></v-list-item>
+                    <v-list-item title="Wisegress"></v-list-item>
                 </v-list>
-
                 <v-divider></v-divider>
-
                 <v-list nav>
-                    <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
-                    <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
-                    <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
+                    <router-link class="router-link-custom" v-for="(item, i) in items" :key="i" :to="item.path">
+                        <v-list-item :prepend-icon="md[item.icon]" :title="item.title"></v-list-item>
+                    </router-link>
                 </v-list>
             </v-navigation-drawer>
         </v-layout>
@@ -25,6 +23,33 @@ export default {
     name: 'SideBar',
     data() {
         return {
+            items: [
+                {
+                    title: 'Lista de Farefas',
+                    path: '/lista-tarefas',
+                    icon: 'mdiListBoxOutline'
+                },
+                {
+                    title: 'Pomodoro',
+                    path: '/pomodoro',
+                    icon: 'mdiClockOutline'
+                },
+                // {
+                //     title: 'Objetivos',
+                //     path: '/objetivo',
+                //     icon: 'mdiFlagCheckered'
+                // },
+                // {
+                //     title: 'Agenda',
+                //     path: '/agenda',
+                //     icon: 'mdiCalendarMonth'
+                // },
+                // {
+                //     title: 'Kanban',
+                //     path: 'kanban',
+                //     icon: 'mdiDeveloperBoard'
+                // }
+            ]
         }
     },
     methods: {
@@ -36,3 +61,10 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+.router-link-custom {
+    text-decoration: none;
+    color: white;
+}
+</style>

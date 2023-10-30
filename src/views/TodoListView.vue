@@ -1,5 +1,4 @@
 <template>
-    <SideBar />
     <v-container class="w-50">
         <TodoList />
     </v-container>
@@ -7,7 +6,6 @@
   
 <script>
 import TodoList from '@/components/TodoList.vue';
-import SideBar from '@/components/SideBar.vue'
 export default {
     name: 'TodoListView',
     data() {
@@ -17,7 +15,6 @@ export default {
     methods: {
     },
     components: {
-        SideBar,
         TodoList
     }
 }
