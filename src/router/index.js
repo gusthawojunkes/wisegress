@@ -12,33 +12,84 @@ const router = createRouter({
     {
       path: '/',
       name: 'Welcome',
-      component: Welcome
+      component: Welcome,
+      icon: 'mdiHome',
+      meta: {
+        showSidebar: false
+      }
     },
     {
       path: '/cadastro',
       name: 'Register',
-      component: Register
+      component: Register,
+      icon: 'mdiAccountCircle',
+      meta: {
+        showSidebar: false
+      }
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      icon: 'mdiLogin',
+      meta: {
+        showSidebar: false
+      }
     },
     {
       path: '/cadastro-perfil',
       name: 'ProfileRegister',
-      component: ProfileRegister
+      component: ProfileRegister,
+      icon: 'mdiAccountFileText',
+      meta: {
+        showSidebar: false
+      }
     },
     {
       path: '/lista-tarefas',
       name: 'TodoList',
-      component: TodoListView
+      component: TodoListView,
+      icon: 'mdiListBoxOutline',
+      meta: {
+        showSidebar: true
+      }
     },
     {
       path: '/pomodoro',
       name: 'Pomodoro',
-      component: Pomodoro
-    }
+      component: Pomodoro,
+      icon: 'mdiClockOutline',
+      meta: {
+        showSidebar: true
+      }
+    },
+    // {
+    //   path: '/objetivos',
+    //   name: 'Goal',
+    //   component: Goal,
+    //   icon: 'mdiFlagCheckered',
+    // meta: {
+    //   showSidebar: true
+    // }
+    // },
+    // {
+    //   path: '/agenda',
+    //   name: 'Agenda',
+    //   component: Schedule,
+    //   icon: 'mdiCalendarMonth',
+    // meta: {
+    //   showSidebar: true
+    // }
+    // },
+    // {
+    //   path: 'kanban',
+    //   name: 'Kanban',
+    //   component: Kanban,
+    //   icon: 'mdiDeveloperBoard',
+    // meta: {
+    //   showSidebar: true
+    // }
+    // }
   ]
 })
 
