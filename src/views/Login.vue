@@ -36,7 +36,7 @@
     </div>
 </template>
 <script>
-// import axios from 'axios'
+import UserService from "@/services/user.service";
 
 export default {
     name: 'Login',
@@ -61,11 +61,21 @@ export default {
     methods: {
         async onSubmit() {
             try {
-                // await axios.get('')
+              const user = await UserService.login('/auth/login', {
+                email: this.email,
+                password: this.password
+              })
+
+              console.log(user)
             } catch (error) {
-                this.snackbar = true
-                this.alertColor = 'error'
-                this.alertMsg = 'Erro ao realizar o Login!'
+              console.error(error);
+              let message = 'Erro ao realizar o Login!';
+              this.snackbar = true
+              this.alertColor = 'error'
+              if (error && error.message) {
+                message = error.message;
+              }
+              this.alertMsg = message;
             }
         },
     },
