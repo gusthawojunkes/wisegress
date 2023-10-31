@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import ProfileRegister from '../views/ProfileRegister.vue'
 import TodoListView from '../views/TodoListView.vue'
 import Pomodoro from '../views/Pomodoro.vue'
+import KanbanBoard from '../views/KanbanBoard.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,6 +64,14 @@ const router = createRouter({
         showSidebar: true
       }
     },
+    {
+      path: '/kanban',
+      name: 'KanbanBoard',
+      component: KanbanBoard,
+      icon: 'mdiDeveloperBoard',
+      meta: {
+        showSidebar: true
+      }
     // {
     //   path: '/objetivos',
     //   name: 'Goal',
@@ -80,16 +89,8 @@ const router = createRouter({
     // meta: {
     //   showSidebar: true
     // }
-    // },
-    // {
-    //   path: 'kanban',
-    //   name: 'Kanban',
-    //   component: Kanban,
-    //   icon: 'mdiDeveloperBoard',
-    // meta: {
-    //   showSidebar: true
     // }
-    // }
+    }
   ]
 })
 
