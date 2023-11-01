@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import ProfileRegister from '../views/ProfileRegister.vue'
 import TodoListView from '../views/TodoListView.vue'
 import Pomodoro from '../views/Pomodoro.vue'
+import UserService from "@/services/user.service";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,7 +47,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/lista-tarefas',
+      path: '/todo',
       name: 'TodoList',
       component: TodoListView,
       icon: 'mdiListBoxOutline',
@@ -91,6 +92,14 @@ const router = createRouter({
     // }
     // }
   ]
+})
+
+const isAuthenticated = UserService.isAuthenticated();
+const publicRoutes = ['Welcome', 'Register', 'Login']
+// GOOD
+router.beforeEach((to, from, next) => {
+  if (!publicRoutes.includes(to.name) && !isAuthenticated) next({ name: 'Login' })
+  else next()
 })
 
 export default router

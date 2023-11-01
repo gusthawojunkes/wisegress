@@ -8,10 +8,14 @@ export default class UserService {
             const user = response.data.user;
             const token = response.data.token;
             sessionStorage.setItem("TOKEN", token);
-            localStorage.setItem("USER", JSON.stringify(user));
+            sessionStorage.setItem("USER", JSON.stringify(user));
             return user;
         } catch (error) {
-            throw error.response.data;
+            if (error.response) {
+                throw error.response.data;
+            }
+
+            throw error;
         }
     }
 
@@ -20,7 +24,13 @@ export default class UserService {
     }
 
     static getUser() {
-        return JSON.parse(localStorage.getItem("USER"))
+        return JSON.parse(sessionStorage.getItem("USER"))
+    }
+
+    static isAuthenticated() {
+        const token = this.getToken();
+
+        return token && token != null;
     }
 
 }
