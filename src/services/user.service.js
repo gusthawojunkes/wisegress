@@ -15,6 +15,14 @@ export default class UserService {
         }
     }
 
+    static async register(url, data) {
+        try {
+            await HttpService.post(url, data, {});
+        } catch (error) {
+            throw error.response.data;
+        }
+    }
+
     static getToken() {
         return sessionStorage.getItem("TOKEN");
     }

@@ -34,7 +34,7 @@
     </div>
 </template>
 <script>
-import axios from 'axios'
+import UserService from "@/services/user.service";
 
 export default {
     name: 'Register',
@@ -62,13 +62,20 @@ export default {
     methods: {
         async onSubmit() {
             try {
-                // await axios.get('')
+                const user = await UserService.register('/auth/register', {
+                    name: this.name,
+                    date: this.date,
+                    email: this.email,
+                    password: this.password
+                })
+
+                console.log(user)
 
                 this.snackbar = true
                 this.alertColor = 'success'
                 this.alertMsg = 'Usuário cadastrado com sucesso!'
 
-                await this.onRegister()
+                // await this.onRegister()
             } catch (error) {
                 this.snackbar = true
                 this.alertColor = 'error'
