@@ -1,18 +1,39 @@
 <template>
     <div>
+        <div class="my-4">
+            <h2>{{ title }}</h2>
+            <v-divider></v-divider>
+        </div>
+        <!-- <Card v-for="(card, c) in cards" :key="c" :card="card" /> -->
+        <TodoList />
     </div>
 </template>
   
 <script>
+import Card from '@/components/Card.vue';
+import TodoList from '@/components/TodoList.vue'
+
 export default {
     name: 'Column',
-    data() {
-        return {
+    props: {
+        title: {
+            type: String,
+            required: true
+        },
+        cards: {
+            type: Array,
+            required: true
         }
     },
-    methods: {
-    }
+    components: {
+        Card,
+        TodoList
+    },
 }
 </script>
-  
-<style></style>
+
+<style scoped>
+h2 {
+    color: white;
+}
+</style>

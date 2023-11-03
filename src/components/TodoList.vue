@@ -41,18 +41,23 @@
                 </v-dialog>
             </v-row>
             <div v-for="task in tasks" :key="task.uuid">
-                <TodoItem v-if="!task.done" :task="task" @taskDone="taskDone" @taskEdit="selectTask" />
+                <TodoItem v-if="filterSituation == task.done" :task="task" @taskDone="taskDone" @taskEdit="selectTask" />
             </div>
         </v-col>
     </v-container>
 </template>
-  
+
 <script>
 import TodoItem from '@/components/TodoItem.vue'
 
 export default {
     name: 'TodoList',
     props: {
+        filterSituation: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
     },
     data() {
         return {

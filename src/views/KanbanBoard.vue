@@ -1,7 +1,13 @@
 <template>
-  <div class="board">
-    <column v-for="(column, c) in columns" :key="c" :title="column.title" :cards="column.cards" />
-  </div>
+  <v-container>
+    <v-row class="d-flex justify-center h-100 ">
+      <v-col v-for="column in columns" :key="column.id" cols="3" @dragover.prevent @drop="dragEnd($event, column)">
+        <v-card class="h-100 pa-4" color="#47667b">
+          <Column :title="column.title" :cards="filterTasks(column.id)" />
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
   
 <script>
@@ -16,53 +22,71 @@ export default {
     return {
       columns: [
         {
-          title: 'A fazer',
-          cards: [
-            { title: 'Tarefa 1', description: 'Descrição da tarefa 1' },
-            { title: 'Tarefa 2', description: 'Descrição da tarefa 2' },
-          ],
+          id: 'pending',
+          title: 'À Fazer',
         },
         {
-          title: 'Em progresso',
-          cards: [
-            { title: 'Tarefa 3', description: 'Descrição da tarefa 3' },
-          ],
+          id: 'in_progress',
+          title: 'Em Progresso',
         },
         {
-          title: 'Concluído',
-          cards: [
-            { title: 'Tarefa 4', description: 'Descrição da tarefa 4' },
-            { title: 'Tarefa 5', description: 'Descrição da tarefa 5' },
-          ],
+          id: 'done',
+          title: 'Feito',
         },
+      ],
+      tasks: [
+        {
+          uuid: 'dwadawdadawda',
+          description: 'Tarefa 1',
+          priority: 'Prioridade Alta',
+          done: false,
+          situation: 'pending'
+        },
+        {
+          uuid: 'diajdioawhdio',
+          description: 'Tarefa 2',
+          priority: 'Prioridade Baixa',
+          done: false,
+          situation: 'pending'
+        },
+        {
+          uuid: '89d9ahwdjbbbd',
+          description: 'Tarefa 3',
+          priority: 'Prioridade Alta',
+          done: false,
+          situation: 'in_progress'
+        },
+        {
+          uuid: 'aw98hdawdndnd',
+          description: 'Tarefa 4',
+          priority: 'Prioridade Alta',
+          done: true,
+          situation: 'done'
+        },
+        {
+          uuid: 'ia0jd9a8wjdjd',
+          description: 'Tarefa 5',
+          priority: 'Prioridade Alta',
+          done: true,
+          situation: 'done'
+        }
       ],
     };
   },
   methods: {
-    addCard(columnIndex, card) {
-      this.columns[columnIndex].cards.push(card);
+    filterTasks(situation) {
+      return this.tasks.filter(task => task.situation === situation);
     },
-    deleteCard(columnIndex, cardTitle) {
-      const cardIndex = this.columns[columnIndex].cards.findIndex(card => card.title === cardTitle);
-      this.columns[columnIndex].cards.splice(cardIndex, 1);
+    dragEnd(event, column) {
+      const cardData = event.dataTransfer.getData('card');
+      const card = JSON.parse(cardData);
+      const columnSituation = column.id;
+
+      const taskIndex = this.tasks.findIndex(task => task.uuid === card.uuid);
+      this.tasks[taskIndex].situation = columnSituation;
     },
-    editCard(columnIndex, cardTitle, newTitle, newDescription) {
-      const cardIndex = this.columns[columnIndex].cards.findIndex(card => card.title === cardTitle);
-      const card = this.columns[columnIndex].cards[cardIndex];
-      card.title = newTitle;
-      card.description = newDescription;
-    },
-    moveCard(sourceColumnIndex, destinationColumnIndex, cardTitle) {
-      const cardIndex = this.columns[sourceColumnIndex].cards.findIndex(card => card.title === cardTitle);
-      const card = this.columns[sourceColumnIndex].cards[cardIndex];
-      this.columns[sourceColumnIndex].cards.splice(cardIndex, 1);
-      this.columns[destinationColumnIndex].cards.push(card);
-    },
-    moveColumn(sourceIndex, destinationIndex) {
-      const column = this.columns[sourceIndex];
-      this.columns.splice(sourceIndex, 1);
-      this.columns.splice(destinationIndex, 0, column);
-    }, // this.moveColumn(2, 0); this.addColumn('Testes');
   },
 };
 </script>
+
+<style scoped></style>
