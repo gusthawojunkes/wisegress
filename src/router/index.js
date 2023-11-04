@@ -3,8 +3,9 @@ import Welcome from '../views/Welcome.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import ProfileRegister from '../views/ProfileRegister.vue'
-import TodoListView from '../views/TodoListView.vue'
+import TaskListView from '../views/TaskListView.vue'
 import Pomodoro from '../views/Pomodoro.vue'
+import KanbanBoard from '../views/KanbanBoard.vue'
 import UserService from "@/services/user.service";
 
 const router = createRouter({
@@ -48,8 +49,8 @@ const router = createRouter({
     },
     {
       path: '/todo',
-      name: 'TodoList',
-      component: TodoListView,
+      name: 'TaskListView',
+      component: TaskListView,
       icon: 'mdiListBoxOutline',
       meta: {
         showSidebar: true
@@ -64,6 +65,14 @@ const router = createRouter({
         showSidebar: true
       }
     },
+    {
+      path: '/kanban',
+      name: 'KanbanBoard',
+      component: KanbanBoard,
+      icon: 'mdiDeveloperBoard',
+      meta: {
+        showSidebar: true
+      }
     // {
     //   path: '/objetivos',
     //   name: 'Goal',
@@ -81,16 +90,8 @@ const router = createRouter({
     // meta: {
     //   showSidebar: true
     // }
-    // },
-    // {
-    //   path: 'kanban',
-    //   name: 'Kanban',
-    //   component: Kanban,
-    //   icon: 'mdiDeveloperBoard',
-    // meta: {
-    //   showSidebar: true
     // }
-    // }
+    }
   ]
 })
 

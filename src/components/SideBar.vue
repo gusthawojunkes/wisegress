@@ -34,6 +34,11 @@ export default {
                     path: '/pomodoro',
                     icon: 'mdiClockOutline'
                 },
+                {
+                    title: 'Kanban',
+                    path: 'kanban',
+                    icon: 'mdiDeveloperBoard'
+                }
                 // {
                 //     title: 'Objetivos',
                 //     path: '/objetivo',
@@ -44,11 +49,6 @@ export default {
                 //     path: '/agenda',
                 //     icon: 'mdiCalendarMonth'
                 // },
-                // {
-                //     title: 'Kanban',
-                //     path: 'kanban',
-                //     icon: 'mdiDeveloperBoard'
-                // }
             ]
         }
     },
