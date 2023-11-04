@@ -6,6 +6,7 @@ import ProfileRegister from '../views/ProfileRegister.vue'
 import TaskListView from '../views/TaskListView.vue'
 import Pomodoro from '../views/Pomodoro.vue'
 import KanbanBoard from '../views/KanbanBoard.vue'
+import UserService from "@/services/user.service";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,8 +48,8 @@ const router = createRouter({
       }
     },
     {
-      path: '/lista-tarefas',
-      name: 'TaskList',
+      path: '/todo',
+      name: 'TaskListView',
       component: TaskListView,
       icon: 'mdiListBoxOutline',
       meta: {
@@ -92,6 +93,14 @@ const router = createRouter({
     // }
     }
   ]
+})
+
+const isAuthenticated = UserService.isAuthenticated();
+const publicRoutes = ['Welcome', 'Register', 'Login']
+// GOOD
+router.beforeEach((to, from, next) => {
+  if (!publicRoutes.includes(to.name) && !isAuthenticated) next({ name: 'Login' })
+  else next()
 })
 
 export default router
