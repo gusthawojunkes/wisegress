@@ -1,7 +1,13 @@
 <template>
   <v-container>
-    <v-row class="d-flex justify-center h-100 ">
-      <v-col v-for="column in columns" :key="column.id" cols="3" @dragover.prevent @drop="dragEnd($event, column)">
+    <v-row class="d-flex justify-center h-100">
+      <v-col
+        v-for="column in columns"
+        :key="column.id"
+        cols="3"
+        @dragover.prevent
+        @drop="dragEnd($event, column)"
+      >
         <v-card class="h-100 pa-4" color="#47667b">
           <Column :title="column.title" :cards="filterTasks(column.id)" />
         </v-card>
@@ -9,30 +15,30 @@
     </v-row>
   </v-container>
 </template>
-  
+
 <script>
-import Column from '@/components/Column.vue';
+import Column from '@/components/Column.vue'
 
 export default {
   name: 'KanbanBoard',
   components: {
-    Column,
+    Column
   },
   data() {
     return {
       columns: [
         {
           id: 'pending',
-          title: 'À Fazer',
+          title: 'À Fazer'
         },
         {
           id: 'in_progress',
-          title: 'Em Progresso',
+          title: 'Em Progresso'
         },
         {
           id: 'done',
-          title: 'Feito',
-        },
+          title: 'Feito'
+        }
       ],
       tasks: [
         {
@@ -70,23 +76,25 @@ export default {
           done: true,
           situation: 'done'
         }
-      ],
-    };
+      ]
+    }
   },
   methods: {
     filterTasks(situation) {
-      return this.tasks.filter(task => task.situation === situation);
+      return this.tasks.filter((task) => task.situation === situation)
     },
     dragEnd(event, column) {
-      const cardData = event.dataTransfer.getData('card');
-      const card = JSON.parse(cardData);
-      const columnSituation = column.id;
+      const cardData = event.dataTransfer.getData('card')
+      const card = JSON.parse(cardData)
+      const columnSituation = column.id
 
-      const taskIndex = this.tasks.findIndex(task => task.uuid === card.uuid);
-      this.tasks[taskIndex].situation = columnSituation;
-    },
-  },
-};
+      const taskIndex = this.tasks.findIndex((task) => task.uuid === card.uuid)
+      if (taskIndex >= 0) {
+        this.tasks[taskIndex].situation = columnSituation
+      }
+    }
+  }
+}
 </script>
 
 <style scoped></style>
