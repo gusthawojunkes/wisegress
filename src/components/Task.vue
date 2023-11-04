@@ -1,22 +1,12 @@
 <template>
   <div>
-    <v-card
-      class="mt-4"
-      :draggable="previewMode == 'kanban' ? true : false"
-      @dragend="dragEnd"
-      @dragstart="dragStart($event, task)"
-    >
+    <v-card class="mt-4" :draggable="previewMode == 'kanban' ? true : false" @dragstart="dragStart($event, task)">
       <div class="h-100 d-flex align-center justify-space-between pa-6">
         <div class="h-100 d-flex align-center">
-          <v-hover v-if="previewMode == 'todoList'">
+          <v-hover v-if="previewMode == 'taskList'">
             <template v-slot:default="{ isHovering, props }">
-              <v-btn
-                class="ml-6 mr-6 btn-positive-action"
-                variant="outlined"
-                v-bind="props"
-                :text="isHovering ? '✔' : undefined"
-                @click="done()"
-              >
+              <v-btn class="ml-6 mr-6 btn-positive-action" variant="outlined" v-bind="props"
+                :text="isHovering ? '✔' : undefined" @click="done()">
               </v-btn>
             </template>
           </v-hover>
@@ -29,7 +19,7 @@
             <v-chip color="#6D8B89" size="x-small">{{ task.priority }}</v-chip>
           </div>
         </div>
-        <v-btn class="ma-0" variant="plain" v-bind="props" @click="edit()">
+        <v-btn class="ma-0" variant="plain" @click="edit()">
           <svg-icon type="mdi" :path="pathEdit" size="25" color="#47667B" float="rigth"></svg-icon>
         </v-btn>
       </div>
@@ -50,7 +40,7 @@ export default {
     previewMode: {
       type: String,
       required: true,
-      default: 'todoList'
+      default: 'taskList'
     }
   },
   components: {
@@ -71,10 +61,10 @@ export default {
       this.$emit('taskDone', this.taskUsed)
     },
     edit() {
-      this.$emit('taskEdit', this.taskUsed.uuid)
+      this.$emit('taskEdit', this.taskUsed)
     },
-    dragStart(event, card) {
-      event.dataTransfer.setData('card', JSON.stringify(card))
+    dragStart(event, task) {
+      event.dataTransfer.setData('task', JSON.stringify(task))
     }
   }
 }

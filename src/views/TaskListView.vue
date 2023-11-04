@@ -1,31 +1,17 @@
 <template>
-  <v-col cols="3">
-    <v-card class="h-100 pa-4 d-flex flex-column" color="#47667b">
-      <v-card-title class="my-4">{{ title }}</v-card-title>
-      <v-divider class="mb-6"></v-divider>
-      <TaskList :previewMode="previewMode" :tasks="tasks" @updateTaskList="updateTaskList" />
-    </v-card>
-  </v-col>
+  <v-container class="w-50 pt-12">
+    <TaskList :previewMode="previewMode" :tasks="tasks" @updateTaskList="updateTaskList" />
+  </v-container>
 </template>
 
 <script>
 import TaskList from '@/components/TaskList.vue'
-
 export default {
-  name: 'Column',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    tasks: {
-      type: Array,
-      required: true
-    }
-  },
+  name: 'TaskListView',
   data() {
     return {
-      previewMode: 'kanban',
+      previewMode: 'taskList',
+      tasks: this.getTasks()
     }
   },
   methods: {
@@ -52,8 +38,8 @@ export default {
       ]
     },
     updateTaskList() {
-      this.$emit('updateTaskList');
-    },
+      this.tasks = this.getTasks() // GET
+    }
   },
   components: {
     TaskList
@@ -61,8 +47,4 @@ export default {
 }
 </script>
 
-<style scoped>
-h2 {
-  color: white;
-}
-</style>
+<style></style>

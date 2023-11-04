@@ -15,33 +15,17 @@
                 <v-form v-model="form" @submit.prevent="onSubmit(task.uuid)">
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field
-                        label="Descrição"
-                        variant="outlined"
-                        required
-                        v-model="task.description"
-                        :rules="[rules.required]"
-                      ></v-text-field>
+                      <v-text-field label="Descrição" variant="outlined" required v-model="task.description"
+                        :rules="[rules.required]"></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-select
-                        label="Prioridade*"
-                        variant="outlined"
-                        required
-                        v-model="task.priority"
-                        :rules="[rules.required]"
-                        :items="priority"
-                      ></v-select>
+                      <v-select label="Prioridade*" variant="outlined" required v-model="task.priority"
+                        :rules="[rules.required]" :items="priority"></v-select>
                     </v-col>
                   </v-row>
                   <v-spacer></v-spacer>
-                  <v-btn
-                    class="btn-positive-action mr-6"
-                    variant="text"
-                    @click="dialog = false"
-                    type="submit"
-                    :disabled="!form"
-                  >
+                  <v-btn class="btn-positive-action mr-6" variant="text" @click="dialog = false" type="submit"
+                    :disabled="!form">
                     Salvar
                   </v-btn>
                   <v-btn class="btn-negative-action" variant="text" @click="dialog = false">
@@ -54,24 +38,24 @@
         </v-dialog>
       </v-row>
       <div v-for="task in tasks" :key="task.uuid">
-        <TodoItem
-          v-if="filterSituation == task.done"
-          :task="task"
-          @taskDone="taskDone"
-          @taskEdit="selectTask"
-          :previewMode="previewMode"
-        />
+        <Task v-if="filterSituation == task.done" :task="task" @taskDone="taskDone" @taskEdit="openTaskEditDialog"
+          :previewMode="previewMode" />
       </div>
     </v-col>
   </div>
 </template>
 
 <script>
-import TodoItem from '@/components/TodoItem.vue'
+import Task from '@/components/Task.vue'
 
 export default {
-  name: 'TodoList',
+  name: 'TaskList',
   props: {
+    tasks: {
+      type: Array,
+      required: true,
+      default: () => []
+    },
     filterSituation: {
       type: Boolean,
       required: false,
@@ -80,7 +64,7 @@ export default {
     previewMode: {
       type: String,
       required: true,
-      default: 'todoList'
+      default: 'taskList'
     }
   },
   data() {
@@ -96,7 +80,7 @@ export default {
         situation: 'pending'
       },
       priority: ['Urgente', 'Alta', 'Média', 'Baixa', 'Baixíssima'],
-      tasks: [],
+      tasksList: [],
       rules: {
         required: (value) => !!value || 'Campo obrigatório!'
       }
@@ -106,7 +90,7 @@ export default {
     async onSubmit(taskUuid) {
       try {
         if (taskUuid) {
-          this.editTask(taskUuid)
+          this.editTask(this.task)
         } else {
           this.addTask(this.task)
         }
@@ -125,50 +109,29 @@ export default {
       }
     },
     addTask(task) {
-      this.task.uuid = Math.random().toString(36).substr(2, 9)
-      this.tasks.push(task)
+      task.uuid = Math.random().toString(36).substr(2, 9) // POST
+      this.updateTaskList(task)
     },
-    editTask(taskUuid) {
-      const index = this.tasks.findIndex((task) => task.uuid === taskUuid)
-      this.tasks.splice(index, 1, this.task)
+    editTask(task) {
+      // PUT
+      this.updateTaskList(task)
     },
-    // eslint-disable-next-line no-unused-vars
-    selectTask(selectedTaskUuid) {
+    taskDone(task) {
+      task.done = true
+      // PUT
+      this.updateTaskList(task)
+    },
+    openTaskEditDialog(task) {
       this.dialog = true
-      const index = this.tasks.findIndex((task) => task.uuid === selectedTaskUuid)
-      this.task = this.tasks[index]
+      this.task = task
     },
-    getTasks() {
-      console.log('dialog = ', this.dialog)
+    updateTaskList() {
+      this.$emit('updateTaskList');
     },
-    doTask(task, done = false) {
-      console.log('done = ', done)
-
-      if (!done) return true
-
-      this.tasks.splice(this.tasks.indexOf(task), 1)
-    },
-    taskDone(taskDone = false) {
-      const index = this.tasks.findIndex((task) => task.uuid === taskDone.uuid)
-      this.tasks.splice(index, 1, taskDone)
-
-      console.log(JSON.stringify(this.tasks))
-      this.clearTask()
-    }
   },
   components: {
-    TodoItem
+    Task
   },
-  created() {
-    this.getTasks()
-  },
-  watch: {
-    dialog(dialog) {
-      if (!dialog) {
-        this.getTasks()
-      }
-    }
-  }
 }
 </script>
 

@@ -3,7 +3,7 @@ import Welcome from '../views/Welcome.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import ProfileRegister from '../views/ProfileRegister.vue'
-import TodoListView from '../views/TodoListView.vue'
+import TaskListView from '../views/TaskListView.vue'
 import Pomodoro from '../views/Pomodoro.vue'
 import KanbanBoard from '../views/KanbanBoard.vue'
 
@@ -48,8 +48,8 @@ const router = createRouter({
     },
     {
       path: '/lista-tarefas',
-      name: 'TodoList',
-      component: TodoListView,
+      name: 'TaskList',
+      component: TaskListView,
       icon: 'mdiListBoxOutline',
       meta: {
         showSidebar: true

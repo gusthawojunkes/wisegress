@@ -17,13 +17,13 @@
             </v-row>
         </v-col>
         <v-col cols="8" class="ml-12">
-            <TodoList />
+            <TaskList :previewMode="previewMode" :tasks="tasks" @updateTaskList="updateTaskList" />
         </v-col>
     </v-container>
 </template>
 
 <script>
-import TodoList from '@/components/TodoList.vue';
+import TaskList from '@/components/TaskList.vue';
 export default {
     name: 'Pomodoro',
     data() {
@@ -37,6 +37,8 @@ export default {
             numberBreakTime: 0,
             numberShortStops: 2,
             numberForLongStop: 3,
+            previewMode: 'taskList',
+            tasks: this.getTasks()
         };
     },
     methods: {
@@ -69,6 +71,31 @@ export default {
         switchTime() {
             this.timeStopped = !this.timeStopped;
         },
+        getTasks() {
+            return [
+                {
+                    uuid: '1',
+                    description: 'Tarefa 1',
+                    priority: 'Alta',
+                    done: false
+                },
+                {
+                    uuid: '2',
+                    description: 'Tarefa 2',
+                    priority: 'Média',
+                    done: false
+                },
+                {
+                    uuid: '3',
+                    description: 'Tarefa 3',
+                    priority: 'Baixa',
+                    done: true
+                }
+            ]
+        },
+        updateTaskList() {
+            this.tasks = this.getTasks() // GET
+        }
     },
     computed: {
         minutes() {
@@ -82,7 +109,7 @@ export default {
         setInterval(this.updateTime, 1000);
     },
     components: {
-        TodoList,
+        TaskList,
     },
 };
 </script>
