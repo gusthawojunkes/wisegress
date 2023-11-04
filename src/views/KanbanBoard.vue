@@ -1,17 +1,14 @@
 <template>
   <v-container>
     <v-row class="d-flex justify-center h-100">
-      <v-col
+      <Column
         v-for="column in columns"
         :key="column.id"
-        cols="3"
         @dragover.prevent
         @drop="dragEnd($event, column)"
-      >
-        <v-card class="h-100 pa-4" color="#47667b">
-          <Column :title="column.title" :cards="filterTasks(column.id)" />
-        </v-card>
-      </v-col>
+        :title="column.title"
+        :cards="filterTasks(column.id)"
+      />
     </v-row>
   </v-container>
 </template>

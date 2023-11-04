@@ -1,5 +1,5 @@
 <template>
-  <div class="h-100 d-flex align-center">
+  <div class="h-100">
     <v-col>
       <v-row justify="center">
         <v-dialog v-model="dialog" class="w-50">

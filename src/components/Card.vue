@@ -2,7 +2,7 @@
   <v-card class="my-6" draggable="true" @dragstart="dragStart($event, card)" @dragend="dragEnd">
     <v-card-item style="white-space: pre-line">
       <v-card-text class="pa-0">
-        <p>{{ card.description }}</p>
+        {{ card.description }}
       </v-card-text>
     </v-card-item>
 

@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <div class="my-4">
-      <h2>{{ title }}</h2>
-      <v-divider></v-divider>
-    </div>
-    <!-- <Card v-for="(card, c) in cards" :key="c" :card="card" /> -->
-    <TodoList :previewMode="previewMode" />
-  </div>
+  <v-col cols="3">
+    <v-card class="h-100 pa-4 d-flex flex-column" color="#47667b">
+      <v-card-title class="my-4">{{ title }}</v-card-title>
+      <v-divider class="mb-6"></v-divider>
+      <TodoList :previewMode="previewMode" />
+    </v-card>
+  </v-col>
 </template>
 
 <script>
