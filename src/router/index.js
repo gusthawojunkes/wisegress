@@ -73,24 +73,6 @@ const router = createRouter({
       meta: {
         showSidebar: true
       }
-    // {
-    //   path: '/objetivos',
-    //   name: 'Goal',
-    //   component: Goal,
-    //   icon: 'mdiFlagCheckered',
-    // meta: {
-    //   showSidebar: true
-    // }
-    // },
-    // {
-    //   path: '/agenda',
-    //   name: 'Agenda',
-    //   component: Schedule,
-    //   icon: 'mdiCalendarMonth',
-    // meta: {
-    //   showSidebar: true
-    // }
-    // }
     }
   ]
 })

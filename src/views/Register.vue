@@ -12,7 +12,7 @@
                     <v-form v-model="form" @submit.prevent="onSubmit">
                         <v-text-field v-model="name" label="Nome" variant="outlined" :rules="[rules.required]">
                         </v-text-field>
-                        <v-text-field v-model="date" label="Data" variant="outlined" :rules="[rules.required]" type="date">
+                        <v-text-field v-model="date" label="Data de nascimento" variant="outlined" :rules="[rules.required]" type="date">
                         </v-text-field>
                         <v-text-field v-model="email" label="Email" variant="outlined"
                             :rules="[rules.required, rules.email]" placeholder="exemplo@gmail.com">
@@ -23,18 +23,44 @@
                         <v-text-field v-model="confirmPassword" label="Confirme sua Senha"
                             :rules="[rules.required, rules.samePasswords]" type="password" variant="outlined">
                         </v-text-field>
-                        <v-btn block class="mt-6 btn-positive-action" type="submit" :disabled="!form">Cadastre-se</v-btn>
+
+                      <v-alert
+                          v-if="hasCritics"
+                          type="warning"
+                          density="compact"
+                          variant="tonal"
+                          closeable
+                          icon="mdi-material-design"
+                      >
+                        <ul>
+                          <li v-for="message in critics" :key="message">
+                            {{ message }}
+                          </li>
+                        </ul>
+
+                      </v-alert>
+                        <v-btn block class="mt-6 btn-positive-action" type="submit" :disabled="!form || waitingRegister">
+                          <v-progress-circular
+                              v-if="waitingRegister"
+                              indeterminate
+                              size="24"
+                              width="2"
+                              color="white"
+                          ></v-progress-circular>
+                            {{ waitingRegister ? "" : "Cadastre-se" }}
+                        </v-btn>
+
                     </v-form>
                 </div>
             </v-sheet>
         </v-sheet>
-        <v-snackbar v-model="snackbar" :timeout="1000" :color="alertColor" variant="tonal">
+        <v-snackbar v-model="snackbar" :timeout="3000" :color="alertColor" variant="tonal">
             {{ alertMsg }}
         </v-snackbar>
     </div>
 </template>
 <script>
-import axios from 'axios'
+import UserService from "@/services/user.service";
 
 export default {
     name: 'Register',
@@ -49,6 +75,9 @@ export default {
             email: '',
             password: '',
             confirmPassword: '',
+            waitingRegister: false,
+            hasCritics: false,
+            critics: [],
             rules: {
                 required: value => !!value || 'Campo obrigatório!',
                 samePasswords: value => value === this.password || 'As senhas não coincidem.',
@@ -62,17 +91,43 @@ export default {
     methods: {
         async onSubmit() {
             try {
-                // await axios.get('')
+                this.waitingRegister = true;
+                this.hasCritics = false;
+                this.critics = [];
+                const user = await UserService.register({
+                  name: this.name,
+                  email: this.email,
+                  password: this.password,
+                  birthday: this.date
+                });
+
+                console.log(user);
 
                 this.snackbar = true
                 this.alertColor = 'success'
-                this.alertMsg = 'Usuário cadastrado com sucesso!'
+                this.alertMsg = 'Cadastro realizado com sucesso!'
 
                 await this.onRegister()
             } catch (error) {
-                this.snackbar = true
-                this.alertColor = 'error'
-                this.alertMsg = 'Erro ao cadastrar usuário!'
+                let message = 'Um erro inesperado aconteceu ao cadastrar o usuário!'
+                if (error) {
+                    if (error.message) {
+                      message = error.message;
+                    }
+                    if (error.critics) {
+                      this.hasCritics = true;
+                      for (const critic of error.critics) {
+                        console.log(critic.message)
+                        this.critics.push(critic.message);
+                      }
+                    }
+                }
+
+                this.snackbar = true;
+                this.alertColor = 'error';
+                this.alertMsg = message;
+            } finally {
+              this.waitingRegister = false;
             }
         },
         async onRegister() {

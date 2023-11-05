@@ -61,7 +61,7 @@ export default {
     methods: {
         async onSubmit() {
             try {
-              await UserService.login('/auth/login', {
+              await UserService.login({
                 email: this.email,
                 password: this.password
               });
