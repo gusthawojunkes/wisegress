@@ -75,15 +75,6 @@ const router = createRouter({
         showSidebar: true
       }
     },
-    // {
-    //   path: '/objetivos',
-    //   name: 'Goal',
-    //   component: Goal,
-    //   icon: 'mdiFlagCheckered',
-    //   meta: {
-    //     showSidebar: true
-    //   }
-    // },
     {
       path: '/agenda',
       name: 'Agenda',
@@ -93,6 +84,15 @@ const router = createRouter({
         showSidebar: true
       }
     }
+    // {
+    //   path: '/objetivos',
+    //   name: 'Goal',
+    //   component: Goal,
+    //   icon: 'mdiFlagCheckered',
+    //   meta: {
+    //     showSidebar: true
+    //   }
+    // },
   ]
 })
 
