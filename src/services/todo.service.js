@@ -16,7 +16,6 @@ export default class TodoService {
             console.error(error);
             return [];
         }
-
         return todos;
     }
 

@@ -5,16 +5,28 @@ import { RouterView } from 'vue-router'
 <template>
   <template v-if="$route.meta.showSidebar">
     <SideBar />
+    <Inbox :todos="todos"></Inbox>
   </template>
   <RouterView />
 </template>
 
 <script>
 import SideBar from '@/components/SideBar.vue'
+import Inbox from '@/components/Inbox.vue'
+import TodoService from "@/services/todo.service";
 export default {
   components: {
-    SideBar
-  }
+    SideBar, Inbox
+  },
+  async mounted() {
+    await this.findTodos();
+  },
+  methods: {
+    async findTodos() {
+      this.todos = await TodoService.findAll();
+    }
+  },
+  data: () => ({ todos: [] }),
 } 
 </script >
 
