@@ -8,6 +8,7 @@ import Pomodoro from '@/views/Pomodoro.vue'
 import KanbanBoard from '@/views/KanbanBoard.vue'
 import Dashboard from "@/views/Dashboard.vue";
 import UserService from "@/services/user.service";
+import Calendar from "@/views/Calendar.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -83,7 +84,25 @@ const router = createRouter({
       meta: {
         showSidebar: true
       }
+    },
+    {
+      path: '/agenda',
+      name: 'Agenda',
+      component: Calendar,
+      icon: 'mdiCalendarMonth',
+      meta: {
+        showSidebar: true
+      }
     }
+    // {
+    //   path: '/objetivos',
+    //   name: 'Goal',
+    //   component: Goal,
+    //   icon: 'mdiFlagCheckered',
+    //   meta: {
+    //     showSidebar: true
+    //   }
+    // },
   ]
 })
 

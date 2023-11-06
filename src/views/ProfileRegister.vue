@@ -72,7 +72,7 @@ export default {
         },
         async onFinished() {
             setTimeout(() => {
-                this.$router.push('/lista-tarefas')
+                this.$router.push('/todo')
             }, 1000)
         }
     },
