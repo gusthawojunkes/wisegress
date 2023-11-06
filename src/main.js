@@ -11,7 +11,6 @@ import './assets/main.css'
 import axios from "axios";
 
 import { ProCalendar } from "vue-pro-calendar";
-import "vue-pro-calendar/style";
 
 const vuetify = createVuetify({
     components,

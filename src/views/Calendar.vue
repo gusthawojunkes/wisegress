@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import "vue-pro-calendar/style";
 export default {
     name: "Calendar",
     data() {
