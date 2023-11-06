@@ -61,20 +61,20 @@ export default {
     methods: {
         async onSubmit() {
             try {
-              await UserService.login('/auth/login', {
-                email: this.email,
-                password: this.password
-              });
-              this.$router.push('pomodoro')
+                await UserService.login('/auth/login', {
+                    email: this.email,
+                    password: this.password
+                });
+                this.$router.push('/pomodoro')
             } catch (error) {
-              console.error(error);
-              let message = 'Erro ao realizar o Login!';
-              this.snackbar = true
-              this.alertColor = 'error'
-              if (error && error.message) {
-                message = error.message;
-              }
-              this.alertMsg = message;
+                console.error(error);
+                let message = 'Erro ao realizar o Login!';
+                this.snackbar = true
+                this.alertColor = 'error'
+                if (error && error.message) {
+                    message = error.message;
+                }
+                this.alertMsg = message;
             }
         },
     },
