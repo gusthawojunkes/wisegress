@@ -22,6 +22,11 @@
                       <v-select label="Prioridade*" variant="outlined" required v-model="task.priority"
                         :rules="[rules.required]" :items="priority"></v-select>
                     </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="Data de vencimento" variant="outlined" required v-model="task.dueDate"
+                        :rules="[rules.required]" type="datetime-local">
+                      </v-text-field>
+                    </v-col>
                   </v-row>
                   <v-spacer></v-spacer>
                   <v-btn class="btn-positive-action mr-6" variant="text" @click="dialog = false" type="submit"
@@ -76,6 +81,7 @@ export default {
         uuid: '',
         description: '',
         priority: '',
+        dueDate: '',
         done: false,
         situation: 'pending'
       },

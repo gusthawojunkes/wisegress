@@ -21,19 +21,22 @@ export default {
           uuid: '1',
           description: 'Tarefa 1',
           priority: 'Alta',
-          done: false
+          done: false,
+          dueDate: '2022-03-10T12:15:50'
         },
         {
           uuid: '2',
           description: 'Tarefa 2',
           priority: 'Média',
-          done: false
+          done: false,
+          dueDate: '2022-03-10T12:15:50'
         },
         {
           uuid: '3',
           description: 'Tarefa 3',
           priority: 'Baixa',
-          done: true
+          done: true,
+          dueDate: '2022-03-10T12:15:50'
         }
       ]
     },
