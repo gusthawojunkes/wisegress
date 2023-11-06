@@ -26,7 +26,7 @@ export default {
             items: [
                 {
                     title: 'Lista de Farefas',
-                    path: '/todo',
+                    path: '/tasks',
                     icon: 'mdiListBoxOutline'
                 },
                 {
@@ -39,15 +39,15 @@ export default {
                     path: 'kanban',
                     icon: 'mdiDeveloperBoard'
                 },
-                // {
-                //     title: 'Objetivos',
-                //     path: '/objetivo',
-                //     icon: 'mdiFlagCheckered'
-                // },
                 {
                     title: 'Agenda',
                     path: '/agenda',
                     icon: 'mdiCalendarMonth'
+                },
+                {
+                    title: 'To do',
+                    path: '/todo',
+                    icon: 'mdiFlagCheckered',
                 },
             ]
         }

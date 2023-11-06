@@ -4,11 +4,11 @@
       <v-row justify="center">
         <v-dialog v-model="dialog" class="w-50">
           <template v-slot:activator="{ props }">
-            <v-btn class="btn-positive-action w-75 mb-12" v-bind="props"> Nova Tarefa </v-btn>
+            <v-btn class="btn-positive-action w-75 mb-12" v-bind="props">Nova {{ titleList }} </v-btn>
           </template>
           <v-card>
             <v-card-title>
-              <span class="text-h5" @click="clearTask()">Nova Tarefa</span>
+              <span class="text-h5" @click="clearListItem()">Nova {{ titleList }}</span>
             </v-card-title>
             <v-card-text>
               <v-container>
@@ -22,7 +22,7 @@
                       <v-select label="Prioridade*" variant="outlined" required v-model="task.priority"
                         :rules="[rules.required]" :items="priority"></v-select>
                     </v-col>
-                    <v-col cols="12">
+                    <v-col cols="12" v-if="this.typeList == 'task'">
                       <v-text-field label="Data de vencimento" variant="outlined" required v-model="task.dueDate"
                         :rules="[rules.required]" type="datetime-local">
                       </v-text-field>
@@ -43,7 +43,7 @@
         </v-dialog>
       </v-row>
       <div v-for="task in tasks" :key="task.uuid">
-        <Task v-if="filterSituation == task.done" :task="task" @taskDone="taskDone" @taskEdit="openTaskEditDialog"
+        <ListItem v-if="filterSituation == task.done" :task="task" @taskDone="taskDone" @taskEdit="openListItemEditDialog"
           :previewMode="previewMode" />
       </div>
     </v-col>
@@ -51,10 +51,10 @@
 </template>
 
 <script>
-import Task from '@/components/Task.vue'
+import ListItem from '@/components/ListItem.vue'
 
 export default {
-  name: 'TaskList',
+  name: 'List',
   props: {
     tasks: {
       type: Array,
@@ -69,14 +69,19 @@ export default {
     previewMode: {
       type: String,
       required: true,
-      default: 'taskList'
+      default: 'task'
+    },
+    typeList: {
+      type: String,
+      required: true,
+      default: 'task'
     }
   },
   data() {
     return {
       form: false,
       dialog: false,
-      selectedTaskUuid: '',
+      selectedListItemUuid: '',
       task: {
         uuid: '',
         description: '',
@@ -89,23 +94,25 @@ export default {
       tasksList: [],
       rules: {
         required: (value) => !!value || 'Campo obrigatório!'
-      }
+      },
+      titleList: this.typeList == "task" ? "Tarefa" : "Pendência"
     }
   },
   methods: {
     async onSubmit(taskUuid) {
+      console.log(this.task)
       try {
         if (taskUuid) {
-          this.editTask(this.task)
+          this.editListItem(this.task)
         } else {
-          this.addTask(this.task)
+          this.addListItem(this.task)
         }
       } catch (error) {
         console.log(`Error: ${error.message}`)
       }
-      this.clearTask()
+      this.clearListItem()
     },
-    clearTask() {
+    clearListItem() {
       this.task = {
         uuid: '',
         description: '',
@@ -114,29 +121,29 @@ export default {
         situation: 'pending'
       }
     },
-    addTask(task) {
-      task.uuid = Math.random().toString(36).substr(2, 9) // POST
-      this.updateTaskList(task)
+    addListItem(task) {
+      // POST
+      this.updateList(task)
     },
-    editTask(task) {
+    editListItem(task) {
       // PUT
-      this.updateTaskList(task)
+      this.updateList(task)
     },
     taskDone(task) {
       task.done = true
       // PUT
-      this.updateTaskList(task)
+      this.updateList(task)
     },
-    openTaskEditDialog(task) {
+    openListItemEditDialog(task) {
       this.dialog = true
       this.task = task
     },
-    updateTaskList() {
-      this.$emit('updateTaskList');
+    updateList() {
+      this.$emit('updateList');
     },
   },
   components: {
-    Task
+    ListItem
   },
 }
 </script>

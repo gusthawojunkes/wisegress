@@ -17,13 +17,13 @@
             </v-row>
         </v-col>
         <v-col cols="8" class="ml-12">
-            <TaskList :previewMode="previewMode" :tasks="tasks" @updateTaskList="updateTaskList" />
+            <List :previewMode="previewMode" :tasks="tasks" @updateList="updateList" />
         </v-col>
     </v-container>
 </template>
 
 <script>
-import TaskList from '@/components/TaskList.vue';
+import List from '@/components/List.vue';
 export default {
     name: 'Pomodoro',
     data() {
@@ -37,7 +37,7 @@ export default {
             numberBreakTime: 0,
             numberShortStops: 2,
             numberForLongStop: 3,
-            previewMode: 'taskList',
+            previewMode: 'task',
             tasks: this.getTasks()
         };
     },
@@ -93,7 +93,7 @@ export default {
                 }
             ]
         },
-        updateTaskList() {
+        updateList() {
             this.tasks = this.getTasks() // GET
         }
     },
@@ -109,7 +109,7 @@ export default {
         setInterval(this.updateTime, 1000);
     },
     components: {
-        TaskList,
+        List,
     },
 };
 </script>

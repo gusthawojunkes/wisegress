@@ -31,7 +31,7 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import * as md from '@mdi/js'
 export default {
-  name: 'TodoItem',
+  name: 'ListItem',
   props: {
     task: {
       type: Object,
@@ -41,7 +41,7 @@ export default {
       type: String,
       required: true,
       default: 'taskList'
-    }
+    },
   },
   components: {
     SvgIcon

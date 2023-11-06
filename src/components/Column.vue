@@ -3,13 +3,13 @@
     <v-card class="h-100 pa-4 d-flex flex-column" color="#47667b">
       <v-card-title class="my-4">{{ title }}</v-card-title>
       <v-divider class="mb-6"></v-divider>
-      <TaskList :previewMode="previewMode" :tasks="tasks" @updateTaskList="updateTaskList" />
+      <List :previewMode="previewMode" :tasks="tasks" @updateList="updateList" />
     </v-card>
   </v-col>
 </template>
 
 <script>
-import TaskList from '@/components/TaskList.vue'
+import List from '@/components/List.vue'
 
 export default {
   name: 'Column',
@@ -51,12 +51,12 @@ export default {
         }
       ]
     },
-    updateTaskList() {
-      this.$emit('updateTaskList');
+    updateList() {
+      this.$emit('updateList');
     },
   },
   components: {
-    TaskList
+    List
   }
 }
 </script>
