@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Welcome from '../views/Welcome.vue'
-import Register from '../views/Register.vue'
-import Login from '../views/Login.vue'
-import ProfileRegister from '../views/ProfileRegister.vue'
-import TaskListView from '../views/TaskListView.vue'
-import Pomodoro from '../views/Pomodoro.vue'
-import KanbanBoard from '../views/KanbanBoard.vue'
+import Welcome from '@/views/Welcome.vue'
+import Register from '@/views/Register.vue'
+import Login from '@/views/Login.vue'
+import ProfileRegister from '@/views/ProfileRegister.vue'
+import TaskListView from '@/views/TaskListView.vue'
+import Pomodoro from '@/views/Pomodoro.vue'
+import KanbanBoard from '@/views/KanbanBoard.vue'
+import Dashboard from "@/views/Dashboard.vue";
 import UserService from "@/services/user.service";
 import Calendar from "@/views/Calendar.vue";
 
@@ -37,6 +38,15 @@ const router = createRouter({
       icon: 'mdiLogin',
       meta: {
         showSidebar: false
+      }
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
+      icon: 'mdiDashboard',
+      meta: {
+        showSidebar: true
       }
     },
     {

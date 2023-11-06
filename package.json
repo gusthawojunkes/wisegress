@@ -17,6 +17,7 @@
     "@mdi/font": "^7.3.67",
     "@mdi/js": "^7.3.67",
     "axios": "^1.5.0",
+    "dayjs": "^1.11.10",
     "vue": "^3.3.4",
     "vue-pro-calendar": "^1.1.9",
     "vue-router": "^4.2.4",

@@ -8,7 +8,7 @@
                 <v-divider></v-divider>
                 <v-list nav>
                     <router-link class="router-link-custom" v-for="(item, i) in items" :key="i" :to="item.path">
-                        <v-list-item :prepend-icon="md[item.icon]" :title="item.title"></v-list-item>
+                        <v-list-item :prepend-icon="item.icon" :title="item.title"></v-list-item>
                     </router-link>
                 </v-list>
             </v-navigation-drawer>
@@ -17,13 +17,17 @@
 </template>
   
 <script>
-import SvgIcon from '@jamescoyle/vue-icon';
 import * as md from '@mdi/js';
 export default {
     name: 'SideBar',
     data() {
         return {
             items: [
+                {
+                  title: 'Dashboard',
+                  path: '/dashboard',
+                  icon: 'mdiDashboard'
+                },
                 {
                     title: 'Lista de Farefas',
                     path: '/todo',
@@ -39,11 +43,6 @@ export default {
                     path: 'kanban',
                     icon: 'mdiDeveloperBoard'
                 },
-                // {
-                //     title: 'Objetivos',
-                //     path: '/objetivo',
-                //     icon: 'mdiFlagCheckered'
-                // },
                 {
                     title: 'Agenda',
                     path: '/agenda',
