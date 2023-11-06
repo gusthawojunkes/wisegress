@@ -10,6 +10,9 @@ import * as directives from 'vuetify/directives'
 import './assets/main.css'
 import axios from "axios";
 
+import { ProCalendar } from "vue-pro-calendar";
+import "vue-pro-calendar/style";
+
 const vuetify = createVuetify({
     components,
     directives,
@@ -21,5 +24,7 @@ const app = createApp(App)
 
 app.use(router)
 app.use(vuetify)
+
+app.use(ProCalendar);
 
 app.mount('#app')

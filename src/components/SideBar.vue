@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card style='z-index:20001;'>
         <v-layout>
             <v-navigation-drawer expand-on-hover rail color="#47667B">
                 <v-list>
@@ -26,7 +26,7 @@ export default {
             items: [
                 {
                     title: 'Lista de Farefas',
-                    path: '/lista-tarefas',
+                    path: '/todo',
                     icon: 'mdiListBoxOutline'
                 },
                 {
@@ -38,17 +38,17 @@ export default {
                     title: 'Kanban',
                     path: 'kanban',
                     icon: 'mdiDeveloperBoard'
-                }
+                },
                 // {
                 //     title: 'Objetivos',
                 //     path: '/objetivo',
                 //     icon: 'mdiFlagCheckered'
                 // },
-                // {
-                //     title: 'Agenda',
-                //     path: '/agenda',
-                //     icon: 'mdiCalendarMonth'
-                // },
+                {
+                    title: 'Agenda',
+                    path: '/agenda',
+                    icon: 'mdiCalendarMonth'
+                },
             ]
         }
     },
