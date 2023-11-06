@@ -18,10 +18,10 @@
                         </v-text-field>
                         <v-btn block class="mt-6 btn-positive-action" type="submit" :disabled="!form">Acessar</v-btn>
                         <div class="d-flex justify-space-between mt-2">
-                            <RouterLink to="/recuperar-senha" class="text-decoration-none">
-                                <a class="text-caption" rel="noopener noreferrer">
-                                    Esqueçeu sua senha?</a>
-                            </RouterLink>
+<!--                            <RouterLink to="/recuperar-senha" class="text-decoration-none">-->
+<!--                                <a class="text-caption" rel="noopener noreferrer">-->
+<!--                                    Esqueçeu sua senha?</a>-->
+<!--                            </RouterLink>-->
                             <RouterLink to="/cadastro" class="text-decoration-none">
                                 <a rel="noopener noreferrer" target="_blank">Cadastre-se</a>
                             </RouterLink>
@@ -65,7 +65,7 @@ export default {
                 email: this.email,
                 password: this.password
               });
-              this.$router.push('pomodoro')
+              this.$router.push('/dashboard')
             } catch (error) {
               console.error(error);
               let message = 'Erro ao realizar o Login!';

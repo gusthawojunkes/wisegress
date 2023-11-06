@@ -40,7 +40,12 @@ export default class UserService {
         return JSON.parse(sessionStorage.getItem("USER"))
     }
 
+    static getUserUuid() {
+        return sessionStorage.getItem("USER_UUID")
+    }
+
     static save(user = {})  {
+        sessionStorage.setItem("USER_UUID", user.uuid);
         sessionStorage.setItem("USER", JSON.stringify(user));
     }
 
