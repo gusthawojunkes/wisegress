@@ -61,11 +61,11 @@ export default {
     methods: {
         async onSubmit() {
             try {
-                await UserService.login('/auth/login', {
-                    email: this.email,
-                    password: this.password
-                });
-                this.$router.push('/pomodoro')
+              await UserService.login({
+                email: this.email,
+                password: this.password
+              });
+              this.$router.push('pomodoro')
             } catch (error) {
                 console.error(error);
                 let message = 'Erro ao realizar o Login!';
