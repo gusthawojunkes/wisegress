@@ -9,6 +9,7 @@ import KanbanBoard from '@/views/KanbanBoard.vue'
 import Dashboard from "@/views/Dashboard.vue";
 import UserService from "@/services/user.service";
 import Calendar from "@/views/Calendar.vue";
+import TodoListView from "@/views/TodoListView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -59,7 +60,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/todo',
+      path: '/tasks',
       name: 'TaskListView',
       component: TaskListView,
       icon: 'mdiListBoxOutline',
@@ -93,16 +94,16 @@ const router = createRouter({
       meta: {
         showSidebar: true
       }
-    }
-    // {
-    //   path: '/objetivos',
-    //   name: 'Goal',
-    //   component: Goal,
-    //   icon: 'mdiFlagCheckered',
-    //   meta: {
-    //     showSidebar: true
-    //   }
-    // },
+    },
+    {
+      path: '/todo',
+      name: 'Todo',
+      component: TodoListView,
+      icon: 'mdiFlagCheckered',
+      meta: {
+        showSidebar: true
+      }
+    },
   ]
 })
 

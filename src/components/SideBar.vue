@@ -30,7 +30,7 @@ export default {
                 },
                 {
                     title: 'Lista de Farefas',
-                    path: '/todo',
+                    path: '/tasks',
                     icon: 'mdiListBoxOutline'
                 },
                 {
@@ -47,6 +47,11 @@ export default {
                     title: 'Agenda',
                     path: '/agenda',
                     icon: 'mdiCalendarMonth'
+                },
+                {
+                    title: 'To do',
+                    path: '/todo',
+                    icon: 'mdiFlagCheckered',
                 },
             ]
         }

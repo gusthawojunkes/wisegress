@@ -1,16 +1,17 @@
 <template>
   <v-container class="w-50 pt-12">
-    <TaskList :previewMode="previewMode" :tasks="tasks" @updateTaskList="updateTaskList" />
+    <List :previewMode="previewMode" :tasks="tasks" @updateList="updateList" :typeList="typeList" />
   </v-container>
 </template>
 
 <script>
-import TaskList from '@/components/TaskList.vue'
+import List from '@/components/List.vue'
 export default {
   name: 'TaskListView',
   data() {
     return {
-      previewMode: 'taskList',
+      previewMode: 'task',
+      typeList: 'task',
       tasks: this.getTasks()
     }
   },
@@ -40,12 +41,12 @@ export default {
         }
       ]
     },
-    updateTaskList() {
+    updateList() {
       this.tasks = this.getTasks() // GET
     }
   },
   components: {
-    TaskList
+    List
   }
 }
 </script>
