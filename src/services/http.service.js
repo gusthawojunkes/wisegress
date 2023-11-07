@@ -18,6 +18,22 @@ export default class HttpService {
         });
     }
 
+    static async put(url, data, headers = undefined) {
+        console.log(`Requesting to: ${url}`);
+        headers = this.configureHeaders(headers);
+        return axios.post(url, data, {
+            headers
+        });
+    }
+
+    static async delete(url, headers = undefined) {
+        console.log(`Requesting to: ${url}`);
+        headers = this.configureHeaders(headers);
+        return axios.delete(url,{
+            headers
+        });
+    }
+
 
     static configureHeaders(headers) {
         if (!headers && UserService.getToken() != null) {
