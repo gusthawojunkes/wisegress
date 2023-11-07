@@ -3,6 +3,7 @@ import UserService from "@/services/user.service";
 
 export default class HttpService {
     static async post(url, data, headers = undefined) {
+        console.log(`Requesting to: ${url}`);
         headers = this.configureHeaders(headers);
         return axios.post(url, data, {
             headers
@@ -10,6 +11,7 @@ export default class HttpService {
     }
 
     static async get(url, headers = undefined) {
+        console.log(`Requesting to: ${url}`);
         headers = this.configureHeaders(headers);
         return axios.get(url,{
             headers

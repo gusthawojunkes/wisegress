@@ -6,40 +6,26 @@
   
 <script>
 import List from '@/components/List.vue'
+import TodoService from "@/services/todo.service";
 export default {
     name: 'TodoItemView',
+    async mounted() {
+      await this.updateList();
+    },
     data() {
         return {
             previewMode: 'todo',
             typeList: 'todo',
-            tasks: this.getTasks()
+            tasks: []
         }
     },
     methods: {
-        getTasks() {
-            return [
-                {
-                    uuid: '1',
-                    description: 'Teste 1',
-                    priority: 'Alta',
-                    done: false,
-                },
-                {
-                    uuid: '2',
-                    description: 'Teste 2',
-                    priority: 'Média',
-                    done: false,
-                },
-                {
-                    uuid: '3',
-                    description: 'Teste 3',
-                    priority: 'Baixa',
-                    done: true,
-                }
-            ]
+        async getTasks() {
+            return await TodoService.findAll();
         },
-        updateList() {
-            this.tasks = this.getTasks() // GET
+        async updateList() {
+            this.tasks = await this.getTasks();
+            console.log(this.tasks)
         }
     },
     components: {

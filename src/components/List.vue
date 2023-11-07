@@ -22,7 +22,7 @@
                       <v-select label="Prioridade*" variant="outlined" required v-model="task.priority"
                         :rules="[rules.required]" :items="priority"></v-select>
                     </v-col>
-                    <v-col cols="12" v-if="this.typeList == 'task'">
+                    <v-col cols="12" v-if="this.typeList === 'task'">
                       <v-text-field label="Data de vencimento" variant="outlined" required v-model="task.dueDate"
                         :rules="[rules.required]" type="datetime-local">
                       </v-text-field>
@@ -43,8 +43,8 @@
         </v-dialog>
       </v-row>
       <div v-for="task in tasks" :key="task.uuid">
-        <ListItem v-if="filterSituation == task.done" :task="task" @taskDone="taskDone" @taskEdit="openListItemEditDialog"
-          :previewMode="previewMode" />
+        <ListItem v-if="filterSituation === task.done" :task="task" @taskDone="taskDone" @taskEdit="openListItemEditDialog"
+          :previewMode="previewMode" :typeList="typeList" />
       </div>
     </v-col>
   </div>
@@ -52,6 +52,7 @@
 
 <script>
 import ListItem from '@/components/ListItem.vue'
+import {getDisplayLabels} from "@/helpers/PriorityHelper";
 
 export default {
   name: 'List',
@@ -90,12 +91,12 @@ export default {
         done: false,
         situation: 'pending'
       },
-      priority: ['Urgente', 'Alta', 'Média', 'Baixa', 'Baixíssima'],
+      priority: getDisplayLabels(),
       tasksList: [],
       rules: {
         required: (value) => !!value || 'Campo obrigatório!'
       },
-      titleList: this.typeList == "task" ? "Tarefa" : "Pendência"
+      titleList: this.typeList == "task" ? "Tarefa" : "Pendência",
     }
   },
   methods: {

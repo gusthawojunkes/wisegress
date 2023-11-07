@@ -3,7 +3,7 @@ const LABELS = {
     "HIGH": "Alta",
     "MEDIUM": "Média",
     "LOW": "Baixa",
-    "LOWEST": "Muito baixa"
+    "LOWEST": "Baixíssima"
 };
 
 const COLORS = {
@@ -21,4 +21,8 @@ export function getPriorityLabel(priority) {
 
 export function getChipColor(priority) {
     return COLORS[priority] || "default";
+}
+
+export function getDisplayLabels() {
+    return Object.values(LABELS);
 }
