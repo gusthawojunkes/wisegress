@@ -3,7 +3,7 @@ import Welcome from '@/views/Welcome.vue'
 import Register from '@/views/Register.vue'
 import Login from '@/views/Login.vue'
 import ProfileRegister from '@/views/ProfileRegister.vue'
-import TaskListView from '@/views/TaskListView.vue'
+import Task from '@/views/Task.vue'
 import Pomodoro from '@/views/Pomodoro.vue'
 import KanbanBoard from '@/views/KanbanBoard.vue'
 import Dashboard from "@/views/Dashboard.vue";
@@ -61,8 +61,8 @@ const router = createRouter({
     },
     {
       path: '/tasks',
-      name: 'TaskListView',
-      component: TaskListView,
+      name: 'Task',
+      component: Task,
       icon: 'mdiListBoxOutline',
       meta: {
         showSidebar: true
