@@ -14,4 +14,13 @@ export default class FeedbackService {
             console.error(error);
         }
     }
+
+    static async getClassifications() {
+        try {
+            await HttpService.get(`/feeback/calculate/${UserService.getUserUuid()}`);
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
 }

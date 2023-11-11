@@ -19,7 +19,7 @@
                     @click="switchTime()"
                 ></v-btn>
                 <v-spacer></v-spacer>
-                <v-btn icon="mdi-restart-alt" @click="restart()"></v-btn>
+                <v-btn icon="mdi-refresh" @click="restart()"></v-btn>
             </v-row>
         </v-col>
         <v-col cols="8" class="ml-12">

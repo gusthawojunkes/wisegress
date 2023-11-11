@@ -121,9 +121,9 @@ export default {
     async onSubmit(taskUuid) {
       try {
         if (taskUuid) {
-          this.editListItem(this.task)
+          await this.editListItem(this.task)
         } else {
-          this.addListItem(this.task)
+          await this.addListItem(this.task)
         }
       } catch (error) {
         console.log(`Error: ${error.message}`)
@@ -194,7 +194,7 @@ export default {
       this.dialog = true
       this.task = task
 
-      if (this.typeList != 'task') {
+      if (this.typeList !== 'task') {
         this.task.description = task.content
       }
     },

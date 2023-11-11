@@ -29,27 +29,26 @@
               </v-list-item>
             </v-list>
 
-            <v-card-actions>
+            <v-card-actions class="d-flex justify-end">
               <v-btn
                   variant="text"
                   :disabled="todo.done === true"
+                  icon="mdi-check"
                   @click="this.complete(todo)"
               >
-                Concluir
               </v-btn>
 
               <v-btn
                   variant="text"
+                  icon="mdi-delete"
                   @click="this.delete(todo)"
               >
-                Excuir
               </v-btn>
               <v-btn
-                  color="primary"
                   variant="text"
+                  icon="mdi-arrow-up"
                   @click="this.detail(todo)"
               >
-                Detalhar
               </v-btn>
             </v-card-actions>
           </v-card>

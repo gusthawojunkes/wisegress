@@ -8,7 +8,29 @@
       </span>
       </v-col>
       <v-col cols="1">
-        <v-btn>+</v-btn>
+        <v-menu location="bottom">
+          <template v-slot:activator="{ props }">
+            <v-btn
+                color="#47667b"
+                icon="mdi-plus"
+                v-bind="props"
+            >
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item
+                v-for="(option, index) in options"
+                :key="index"
+            >
+              <v-list-item-title>
+                <v-btn @click="console.log(option)">
+                  {{option}}
+                </v-btn>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
       </v-col>
     </v-row>
 
@@ -24,6 +46,7 @@
 import dayjs from 'dayjs'
 import TodoService from "@/services/todo.service";
 import SummaryTodo from "@/components/SummaryTodo.vue";
+import FeedbackService from "@/services/feedback.service";
 export default {
 
   name: 'Dashboard',
@@ -34,10 +57,13 @@ export default {
   },
   async mounted() {
     await this.findTodos();
+    this.classifications = await FeedbackService.getClassifications();
   },
   data() {
     return {
       todos: [],
+      classifications: [],
+      options: ["Tarefa", "Todo"]
     }
   },
   methods: {

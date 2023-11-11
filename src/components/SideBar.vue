@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import * as md from '@mdi/js';
 export default {
     name: 'SideBar',
     data() {
@@ -26,38 +25,32 @@ export default {
                 {
                     title: 'Dashboard',
                     path: '/dashboard',
-                    icon: 'mdiDashboard'
+                    icon: 'mdi-home'
                 },
                 {
-                  title: 'Caixa de entrada',
-                  path: '/todo',
-                  icon: 'mdiFlagCheckered',
+                    title: 'Caixa de entrada',
+                    path: '/todo',
+                    icon: 'mdi-inbox',
                 },
                 {
                     title: 'Tarefas',
                     path: '/tasks',
-                    icon: 'mdiListBoxOutline'
+                    icon: 'mdi-list-box-outline'
                 },
                 {
                     title: 'Pomodoro',
                     path: '/pomodoro',
-                    icon: 'mdiClockOutline'
+                    icon: 'mdi-clock-outline'
                 },
                 {
                     title: 'Agenda',
                     path: '/agenda',
-                    icon: 'mdiCalendarMonth'
+                    icon: 'mdi-calendar-month'
                 },
             ]
         }
     },
-    methods: {
-    },
-    computed: {
-        md() {
-            return md;
-        },
-    },
+
 }
 </script>
 
