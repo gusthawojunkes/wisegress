@@ -43,8 +43,8 @@
         </v-dialog>
       </v-row>
       <div v-for="task in tasks" :key="task.uuid">
-        <ListItem v-if="filterSituation === task.done" :task="task" @taskDone="taskDone" @taskEdit="openListItemEditDialog"
-          :previewMode="previewMode" :typeList="typeList" />
+        <ListItem v-if="filterSituation === task.done" :task="task" @taskDone="taskDone"
+          @taskEdit="openListItemEditDialog" :previewMode="previewMode" :typeList="typeList" />
       </div>
     </v-col>
   </div>
@@ -52,7 +52,11 @@
 
 <script>
 import ListItem from '@/components/ListItem.vue'
-import {getDisplayLabels} from "@/helpers/PriorityHelper";
+import { getDisplayLabels, getPriorityCode } from "@/helpers/PriorityHelper";
+
+import TaskService from '@/services/task.service'
+import TodoService from '@/services/todo.service'
+import UserService from "@/services/user.service";
 
 export default {
   name: 'List',
@@ -121,22 +125,64 @@ export default {
         situation: 'pending'
       }
     },
-    addListItem(task) {
-      // POST
+    async addListItem(task) {
+      let itemToSave = {
+        description: task.description,
+        priority: getPriorityCode(task.priority),
+        dueDate: task.dueDate,
+        userUuid: UserService.getUserUuid()
+      }
+
+      if (this.typeList === 'task') {
+        await TaskService.create(itemToSave)
+      } else {
+        delete itemToSave.dueDate
+        delete itemToSave.situation
+        delete itemToSave.description
+        itemToSave.content = task.description
+
+        await TodoService.create(itemToSave)
+      }
+
       this.updateList(task)
     },
-    editListItem(task) {
-      // PUT
+    async editListItem(task) {
+      let itemToEdit = {
+        uuid: task.uuid,
+        userUuid: UserService.getUserUuid(),
+        description: task.description,
+        done: task.done,
+        dueDate: task.dueDate,
+        priority: getPriorityCode(task.priority),
+      }
+
+      if (this.typeList === 'task') {
+        await TaskService.update(itemToEdit)
+      } else {
+        delete itemToEdit.dueDate
+        delete itemToEdit.situation
+        delete itemToEdit.description
+        itemToEdit.content = task.description
+
+        await TodoService.update(itemToEdit)
+      }
+
       this.updateList(task)
     },
     taskDone(task) {
       task.done = true
-      // PUT
+
+      this.editListItem(task)
+
       this.updateList(task)
     },
     openListItemEditDialog(task) {
       this.dialog = true
       this.task = task
+
+      if (this.typeList != 'task') {
+        this.task.description = task.content
+      }
     },
     updateList() {
       this.$emit('updateList');

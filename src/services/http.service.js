@@ -21,7 +21,7 @@ export default class HttpService {
     static async put(url, data, headers = undefined) {
         console.log(`Requesting to: ${url}`);
         headers = this.configureHeaders(headers);
-        return axios.post(url, data, {
+        return axios.put(url, data, {
             headers
         });
     }

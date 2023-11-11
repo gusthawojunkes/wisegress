@@ -19,6 +19,11 @@ export function getPriorityLabel(priority) {
     return LABELS[priority] || "Não definido";
 }
 
+export function getPriorityCode(priorityLabel){
+    return Object.keys(LABELS).find(key => LABELS[key] === priorityLabel) || priorityLabel;
+
+}
+
 export function getChipColor(priority) {
     return COLORS[priority] || "default";
 }
