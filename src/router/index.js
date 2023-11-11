@@ -20,7 +20,8 @@ const router = createRouter({
       component: Welcome,
       icon: 'mdiHome',
       meta: {
-        showSidebar: false
+        showSidebar: false,
+        hideFixedTodos: true
       }
     },
     {
@@ -29,7 +30,8 @@ const router = createRouter({
       component: Register,
       icon: 'mdiAccountCircle',
       meta: {
-        showSidebar: false
+        showSidebar: false,
+        hideFixedTodos: true
       }
     },
     {
@@ -38,7 +40,8 @@ const router = createRouter({
       component: Login,
       icon: 'mdiLogin',
       meta: {
-        showSidebar: false
+        showSidebar: false,
+        hideFixedTodos: true
       }
     },
     {

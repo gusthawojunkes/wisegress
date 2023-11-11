@@ -29,6 +29,11 @@ export default {
                     icon: 'mdiDashboard'
                 },
                 {
+                  title: 'Caixa de entrada',
+                  path: '/todo',
+                  icon: 'mdiFlagCheckered',
+                },
+                {
                     title: 'Tarefas',
                     path: '/tasks',
                     icon: 'mdiListBoxOutline'
@@ -42,11 +47,6 @@ export default {
                     title: 'Agenda',
                     path: '/agenda',
                     icon: 'mdiCalendarMonth'
-                },
-                {
-                    title: 'Caixa de entrada',
-                    path: '/todo',
-                    icon: 'mdiFlagCheckered',
                 },
             ]
         }

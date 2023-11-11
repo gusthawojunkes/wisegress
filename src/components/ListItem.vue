@@ -20,7 +20,7 @@
           </div>
         </div>
         <v-btn class="ma-0" variant="plain" @click="edit()">
-          <svg-icon type="mdi" :path="pathEdit" size="25" color="#47667B" float="rigth"></svg-icon>
+          <svg-icon :path="pathEdit" color="#47667B" float="rigth" size="25" type="mdi"></svg-icon>
         </v-btn>
       </div>
     </v-card>

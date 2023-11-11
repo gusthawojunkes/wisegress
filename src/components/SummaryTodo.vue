@@ -1,37 +1,28 @@
 <template>
-  <v-card class="mx-auto" variant="tonal">
+  <v-card class="mx-auto" variant="elevated" color="#47667b" min-width="350px">
     <v-card-item>
-      <div>
-        <div class="text-overline mb-1">
-          Caixa de entrada
-        </div>
-        <div class="text-caption">
-          <span v-if="todos.length === 0">Não há nada aqui por enquanto!</span>
-          <div v-else>
-            <ul>
-              <li v-for="(todo, index) in todos" :key="todo.uuid">
-                <v-row v-if="index < 3">
-                  <v-col cols="10">
-                    <v-card-text :class="{ 'text-decoration-line-through' : todo.done}">
-                      {{todo.content}}
-                    </v-card-text>
-                  </v-col>
-                  <v-col class="d-flex justify-center" cols="2">
-                    <PriorityChip :value="todo.priority"></PriorityChip>
-                  </v-col>
-                </v-row>
-              </li>
-            </ul>
+      <v-card-title>
+        Caixa de entrada
+      </v-card-title>
+      <v-card-text>
+        <span v-if="todos.length === 0">Não há nada aqui por enquanto!</span>
+        <div  v-else v-for="(todo, index) in todos" :key="todo.uuid">
+          <div class="d-flex justify-space-between" v-if="index < 3">
+            <span class="d-flex" style="margin-top: 15px"> {{todo.content}} </span>
+            <PriorityChip :value="todo.priority"></PriorityChip>
           </div>
         </div>
-      </div>
+        <v-row class="d-flex justify-center" v-if="(todos.length - 3) > 0">
+          E mais {{ (todos.length - 3) }} itens
+        </v-row>
+      </v-card-text>
+      <v-card-actions class="justify-center">
+        <v-spacer></v-spacer>
+        <v-btn @click="goToTodos()">
+          Ir para a caixa de entrada
+        </v-btn>
+      </v-card-actions>
     </v-card-item>
-    <v-card-actions class="justify-center">
-      <v-spacer></v-spacer>
-      <v-btn @click="goToTodos()">
-        Ir para a caixa de entrada
-      </v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 

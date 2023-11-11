@@ -23,7 +23,7 @@
             </v-row>
         </v-col>
         <v-col cols="8" class="ml-12">
-            <List :previewMode="previewMode" :tasks="tasks" @updateList="updateList" />
+            <List :previewMode="previewMode" :tasks="tasks" @updateList="updateList"  type-list="todo"/>
         </v-col>
     </v-container>
 </template>
@@ -32,6 +32,7 @@
 import List from '@/components/List.vue';
 import UserService from "@/services/user.service";
 import Time from "@/helpers/Time";
+import TodoService from "@/services/todo.service";
 export default {
     name: 'Pomodoro',
     data() {
@@ -80,26 +81,7 @@ export default {
             this.timeStopped = !this.timeStopped;
         },
         async getTasks() {
-            return [
-                {
-                    uuid: '1',
-                    description: 'Tarefa 1',
-                    priority: 'Alta',
-                    done: false
-                },
-                {
-                    uuid: '2',
-                    description: 'Tarefa 2',
-                    priority: 'Média',
-                    done: false
-                },
-                {
-                    uuid: '3',
-                    description: 'Tarefa 3',
-                    priority: 'Baixa',
-                    done: true
-                }
-            ]
+            return TodoService.findAll();
         },
         updateList() {
             this.tasks = this.getTasks();
