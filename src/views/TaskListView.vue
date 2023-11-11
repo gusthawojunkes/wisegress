@@ -6,6 +6,8 @@
 
 <script>
 import List from '@/components/List.vue'
+import TaskService from '@/services/task.service'
+
 export default {
   name: 'TaskListView',
   data() {
@@ -17,29 +19,14 @@ export default {
   },
   methods: {
     getTasks() {
-      return [
-        {
-          uuid: '1',
-          description: 'Tarefa 1',
-          priority: 'Alta',
-          done: false,
-          dueDate: '2022-03-10T12:15:50'
-        },
-        {
-          uuid: '2',
-          description: 'Tarefa 2',
-          priority: 'Média',
-          done: false,
-          dueDate: '2022-03-10T12:15:50'
-        },
-        {
-          uuid: '3',
-          description: 'Tarefa 3',
-          priority: 'Baixa',
-          done: true,
-          dueDate: '2022-03-10T12:15:50'
-        }
-      ]
+      return [{
+        uuid: '8849f9cb-8d2c-413d-85d0-ffec4c6cc4ea',
+        description: 'tche',
+        priority: 'HIGHEST',
+        situation: 'PENDING',
+        dueDate: '2024-12-12 01:01:00.000',
+        done: false,
+      }]
     },
     updateList() {
       this.tasks = this.getTasks() // GET
