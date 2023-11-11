@@ -96,7 +96,7 @@ export default {
       rules: {
         required: (value) => !!value || 'Campo obrigatório!'
       },
-      titleList: this.typeList == "task" ? "Tarefa" : "Pendência",
+      titleList: this.typeList === "task" ? "Tarefa" : "Pendência",
     }
   },
   methods: {

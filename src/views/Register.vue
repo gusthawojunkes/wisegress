@@ -101,8 +101,6 @@ export default {
                   birthday: this.date
                 });
 
-                console.log(user);
-
                 this.snackbar = true
                 this.alertColor = 'success'
                 this.alertMsg = 'Cadastro realizado com sucesso!'
@@ -117,7 +115,6 @@ export default {
                     if (error.critics) {
                       this.hasCritics = true;
                       for (const critic of error.critics) {
-                        console.log(critic.message)
                         this.critics.push(critic.message);
                       }
                     }

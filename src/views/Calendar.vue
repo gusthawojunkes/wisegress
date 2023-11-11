@@ -1,71 +1,39 @@
 <template>
-    <v-container class="w-75">
-        <pro-calendar ref="calendar" :events="evts" :config="cfg" view="month" />
+    <v-container>
+        <pro-calendar :show-close-button="false" ref="calendar" :events="events" :config="cfg" view="month">
+          <template #closeButton>
+            <!-- da pra botar o botão de novo evento aqui -->
+          </template>
+        </pro-calendar>
     </v-container>
 </template>
 
 <script>
 import "vue-pro-calendar/style";
+import EventService from "@/services/event.service";
 export default {
     name: "Calendar",
+    async mounted() {
+      this.events = await this.getEvents();
+    },
     data() {
-        return {
-            cfg: {
-                viewEvent: undefined,
-                reportEvent: undefined,
-                searchPlaceholder: "",
-                eventName: "",
-                closeText: "",
-                nativeDatepicker: false,
-                todayButton: true
-            },
-            evts: this.getTasksFormated(),
-        }
-    },
-    methods: {
-        getTasksFormated() {
-            return this.getTasks().map((task) => {
-                return {
-                    date: this.getDateFormated(task.doneDate),
-                    comment: '',
-                    id: task.id,
-                    keywords: '',
-                    name: task.description,
-                }
-            })
-        },
-        getDateFormated(timestamp) {
-            const date = new Date(timestamp)
-            return date.toISOString()
-        },
-        getTasks() { // GET, TODO substituir pela API
-            return [
-                {
-                    uuid: '1',
-                    description: 'Tarefa 1',
-                    priority: 'Alta',
-                    done: false,
-                    situation: 'pending',
-                    doneDate: 1699295658538
-                },
-                {
-                    uuid: '2',
-                    description: 'Tarefa 2',
-                    priority: 'Média',
-                    done: false,
-                    situation: 'in_progress',
-                    doneDate: 1699295658538
-                },
-                {
-                    uuid: '3',
-                    description: 'Tarefa 3',
-                    priority: 'Baixa',
-                    done: true,
-                    situation: 'done',
-                    doneDate: 1699295658538
-                }
-            ]
-        },
-    },
+          return {
+              cfg: {
+                  viewEvent: undefined,
+                  reportEvent: undefined,
+                  searchPlaceholder: "",
+                  eventName: "",
+                  closeText: "",
+                  nativeDatepicker: false,
+                  todayButton: true
+              },
+            events: [],
+          }
+      },
+      methods: {
+          async getEvents() {
+              return await EventService.findAll();
+          },
+      },
 }
 </script>

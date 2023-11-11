@@ -54,4 +54,27 @@ export default class UserService {
         return token && token != null;
     }
 
+    static getPreferences() {
+        const user = this.getUser();
+
+        if (user == null) return {
+            useKanban: true,
+            usePomodoro: true,
+            useAgenda: true,
+            useTodo: true,
+            pomodoroConfiguration: {
+                duration: 25,
+                shortbreakDuration: 5,
+                longbreakDuration: 15,
+                cicles: 3
+            },
+        }
+
+        return user.preferences;
+    }
+
+    static getPomodoroConfiguration() {
+        return this.getPreferences().pomodoroConfiguration;
+    }
+
 }

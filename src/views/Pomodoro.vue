@@ -12,8 +12,14 @@
                 <v-col>Pausa</v-col>
             </v-row>
             <v-row class=" d-flex align-center justify-center mt-6">
-                <v-btn class="w-50 btn-positive-action" size="large" :text="timeStopped ? `Começar` : `Parar`"
-                    @click="switchTime()"></v-btn>
+                <v-btn
+                    class="w-50 btn-positive-action"
+                    size="large"
+                    :text="timeStopped ? `Começar` : `Parar`"
+                    @click="switchTime()"
+                ></v-btn>
+                <v-spacer></v-spacer>
+                <v-btn icon="mdi-restart-alt" @click="restart()"></v-btn>
             </v-row>
         </v-col>
         <v-col cols="8" class="ml-12">
@@ -24,21 +30,23 @@
 
 <script>
 import List from '@/components/List.vue';
+import UserService from "@/services/user.service";
+import Time from "@/helpers/Time";
 export default {
     name: 'Pomodoro',
     data() {
         return {
             time: 1500,
-            timeFocus: 1500, // Tempo em segundos (25 minutos)
-            shortBreakTime: 300, // Tempo em segundos (5 minutos)
-            longBreakTime: 900, // Tempo em segundos (15 minutos)
+            timeFocus: 1500,
+            shortBreakTime: 300,
+            longBreakTime: 900,
             timeStopped: true,
             isBreak: false,
             numberBreakTime: 0,
             numberShortStops: 2,
             numberForLongStop: 3,
             previewMode: 'task',
-            tasks: this.getTasks()
+            tasks: []
         };
     },
     methods: {
@@ -71,7 +79,7 @@ export default {
         switchTime() {
             this.timeStopped = !this.timeStopped;
         },
-        getTasks() {
+        async getTasks() {
             return [
                 {
                     uuid: '1',
@@ -94,7 +102,11 @@ export default {
             ]
         },
         updateList() {
-            this.tasks = this.getTasks() // GET
+            this.tasks = this.getTasks();
+        },
+        restart() {
+          this.timeStopped = true;
+          this.time = this.timeFocus;
         }
     },
     computed: {
@@ -105,8 +117,14 @@ export default {
             return this.time % 60;
         },
     },
-    mounted() {
+    async mounted() {
         setInterval(this.updateTime, 1000);
+        this.tasks = await this.getTasks();
+        const { duration, shortbreakDuration, longbreakDuration } = UserService.getPomodoroConfiguration();
+        this.time = Time.minutesToSeconds(duration);
+        this.timeFocus = Time.minutesToSeconds(duration);
+        this.shortBreakTime = Time.minutesToSeconds(shortbreakDuration);
+        this.longBreakTime = Time.minutesToSeconds(longbreakDuration);
     },
     components: {
         List,

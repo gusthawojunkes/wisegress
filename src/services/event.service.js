@@ -5,7 +5,13 @@ import HttpStatus from "@/helpers/HttpStatus";
 export default class EventService {
 
     static prepare(event) {
-        return event
+        return {
+            date: event.date,
+            comment: event.description,
+            id: event.uuid,
+            keywords: event.situation,
+            name: event.description,
+        }
     }
     static async findAll() {
         const url = `/event/all/${UserService.getUserUuid()}`;

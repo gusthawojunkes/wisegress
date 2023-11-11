@@ -5,7 +5,7 @@ import { RouterView } from 'vue-router'
 <template>
   <template v-if="$route.meta.showSidebar">
     <SideBar />
-    <Inbox v-if="!$route.meta.hideFixedTodos" :todos="todos"></Inbox>
+    <Inbox v-if="$route.meta.hideFixedTodos === undefined" :todos="todos"></Inbox>
   </template>
   <RouterView />
 </template>

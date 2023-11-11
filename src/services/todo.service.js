@@ -5,6 +5,7 @@ import HttpStatus from "@/helpers/HttpStatus";
 export default class TodoService {
 
     static prepare(todo) {
+        todo.open = false;
         return todo;
     }
 
@@ -62,6 +63,15 @@ export default class TodoService {
         } catch (error) {
             console.error(error);
         }
+    }
+
+    static async markAsDone(todo) {
+        todo.done = true;
+        todo.userUuid = UserService.getUserUuid();
+
+        await this.update(todo);
+
+        return todo;
     }
 
 }

@@ -11,12 +11,12 @@
             <ul>
               <li v-for="(todo, index) in todos" :key="todo.uuid">
                 <v-row v-if="index < 3">
-                  <v-col cols="8">
+                  <v-col cols="10">
                     <v-card-text :class="{ 'text-decoration-line-through' : todo.done}">
                       {{todo.content}}
                     </v-card-text>
                   </v-col>
-                  <v-col cols="4">
+                  <v-col class="d-flex justify-center" cols="2">
                     <PriorityChip :value="todo.priority"></PriorityChip>
                   </v-col>
                 </v-row>
@@ -27,6 +27,7 @@
       </div>
     </v-card-item>
     <v-card-actions class="justify-center">
+      <v-spacer></v-spacer>
       <v-btn @click="goToTodos()">
         Ir para a caixa de entrada
       </v-btn>

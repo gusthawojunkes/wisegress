@@ -1,19 +1,19 @@
 <template>
   <v-container class="align-center w-50">
     <v-row no-gutters>
-      <v-col cols="10">
+      <v-col cols="11">
       <span>
         Hoje
         <small>({{(dayjs().format('DD/MM/YYYY'))}})</small>
       </span>
       </v-col>
-      <v-col cols="2">
+      <v-col cols="1">
         <v-btn>+</v-btn>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12">
         <SummaryTodo :todos="todos"></SummaryTodo>
       </v-col>
     </v-row>

@@ -47,7 +47,8 @@ const router = createRouter({
       component: Dashboard,
       icon: 'mdiDashboard',
       meta: {
-        showSidebar: true
+        showSidebar: true,
+        hideFixedTodos: true
       }
     },
     {
