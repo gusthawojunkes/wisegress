@@ -24,12 +24,12 @@ export default {
         return {
             items: [
                 {
-                  title: 'Dashboard',
-                  path: '/dashboard',
-                  icon: 'mdiDashboard'
+                    title: 'Dashboard',
+                    path: '/dashboard',
+                    icon: 'mdiDashboard'
                 },
                 {
-                    title: 'Lista de Farefas',
+                    title: 'Tarefas',
                     path: '/tasks',
                     icon: 'mdiListBoxOutline'
                 },
@@ -37,11 +37,6 @@ export default {
                     title: 'Pomodoro',
                     path: '/pomodoro',
                     icon: 'mdiClockOutline'
-                },
-                {
-                    title: 'Kanban',
-                    path: 'kanban',
-                    icon: 'mdiDeveloperBoard'
                 },
                 {
                     title: 'Agenda',
