@@ -101,7 +101,6 @@ export default {
   },
   methods: {
     async onSubmit(taskUuid) {
-      console.log(this.task)
       try {
         if (taskUuid) {
           this.editListItem(this.task)

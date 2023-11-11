@@ -15,7 +15,7 @@
         </v-layout>
     </v-card>
 </template>
-  
+
 <script>
 import * as md from '@mdi/js';
 export default {
@@ -29,7 +29,7 @@ export default {
                   icon: 'mdiDashboard'
                 },
                 {
-                    title: 'Lista de Farefas',
+                    title: 'Tarefas',
                     path: '/tasks',
                     icon: 'mdiListBoxOutline'
                 },
@@ -49,7 +49,7 @@ export default {
                     icon: 'mdiCalendarMonth'
                 },
                 {
-                    title: 'To do',
+                    title: 'Caixa de entrada',
                     path: '/todo',
                     icon: 'mdiFlagCheckered',
                 },

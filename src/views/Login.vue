@@ -16,7 +16,16 @@
                         <v-text-field v-model="password" label="Senha" variant="outlined" :rules="[rules.required]"
                             type="password">
                         </v-text-field>
-                        <v-btn block class="mt-6 btn-positive-action" type="submit" :disabled="!form">Acessar</v-btn>
+                        <v-btn block class="mt-6 btn-positive-action" type="submit" :disabled="!form || loggingIn">
+                          <v-progress-circular
+                              v-if="loggingIn"
+                              indeterminate
+                              size="24"
+                              width="2"
+                              color="white"
+                          ></v-progress-circular>
+                          {{ loggingIn ? "" : "Acessar" }}
+                        </v-btn>
                         <div class="d-flex justify-space-between mt-2">
                             <RouterLink to="/cadastro" class="text-decoration-none">
                                 <a rel="noopener noreferrer" target="_blank">Cadastre-se</a>
@@ -44,6 +53,7 @@ export default {
             form: false,
             email: '',
             password: '',
+            loggingIn: false,
             rules: {
                 required: value => !!value || 'Campo obrigatório!',
                 email: value => {
@@ -57,13 +67,14 @@ export default {
     methods: {
         async onSubmit() {
             try {
+              this.loggingIn = true;
               await UserService.login({
                 email: this.email,
                 password: this.password
               });
               setTimeout(() => {
                 this.$router.push('/dashboard')
-              }, 500);
+              }, 1000);
             } catch (error) {
                 console.error(error);
                 let message = 'Erro ao realizar o Login!';
@@ -73,6 +84,8 @@ export default {
                     message = error.message;
                 }
                 this.alertMsg = message;
+            } finally {
+              this.loggingIn = false;
             }
         },
     },

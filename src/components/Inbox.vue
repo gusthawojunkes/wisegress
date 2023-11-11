@@ -5,7 +5,7 @@
         color="primary"
         horizontal
     >
-      <v-btn v-for="todo in todos" :key="todo.uuid">
+      <v-btn v-for="todo in sortedTodos" :key="todo.uuid">
         {{todo.content}}
       </v-btn>
     </v-bottom-navigation>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   name: "Inbox",
   props: {
@@ -20,6 +21,15 @@ export default {
       type: Array,
       required: true
     }
+  },
+  computed: {
+    sortedTodos() {
+      const nextTodo = _.minBy(this.todos, 'insertedAt');
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.index = _.indexOf(this.todos, nextTodo);
+      return _.sortBy(this.todos, 'insertedAt');
+    }
+
   },
   data: () => ({ index: 0 }),
 }

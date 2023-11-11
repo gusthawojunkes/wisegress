@@ -3,7 +3,7 @@
         <List :previewMode="previewMode" :tasks="tasks" @updateList="updateList" :typeList="typeList" />
     </v-container>
 </template>
-  
+
 <script>
 import List from '@/components/List.vue'
 import TodoService from "@/services/todo.service";
@@ -25,7 +25,6 @@ export default {
         },
         async updateList() {
             this.tasks = await this.getTasks();
-            console.log(this.tasks)
         }
     },
     components: {
@@ -33,6 +32,5 @@ export default {
     }
 }
 </script>
-  
+
 <style></style>
-  

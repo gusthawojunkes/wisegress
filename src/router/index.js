@@ -101,7 +101,8 @@ const router = createRouter({
       component: TodoListView,
       icon: 'mdiFlagCheckered',
       meta: {
-        showSidebar: true
+        showSidebar: true,
+        hideFixedTodos: true
       }
     },
   ]
