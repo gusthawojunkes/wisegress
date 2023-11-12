@@ -24,9 +24,7 @@
                 :key="index"
             >
               <v-list-item-title>
-                <v-btn @click="console.log(option)">
-                  {{option}}
-                </v-btn>
+                {{option}}
               </v-list-item-title>
             </v-list-item>
           </v-list>

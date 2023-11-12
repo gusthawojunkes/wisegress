@@ -10,9 +10,6 @@
             <v-card-title>
               <span class="text-h5" @click="clearListItem()">Nova {{ titleList }}</span>
             </v-card-title>
-            <v-card-subtitle v-if="typeList === 'todo'">
-              Dica: Utilize verbos ao cadastrar uma pendência!
-            </v-card-subtitle>
             <v-card-text>
               <v-container>
                 <v-form v-model="form" @submit.prevent="onSubmit(task.uuid)">
@@ -65,7 +62,7 @@
 </template>
 
 <script>
-import ListItem from '@/components/ListItem.vue'
+import ListItem from '@/components/TaskItem.vue'
 import { getDisplayLabels, getPriorityCode } from "@/helpers/PriorityHelper";
 
 import TaskService from '@/services/task.service'

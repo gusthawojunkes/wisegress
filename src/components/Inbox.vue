@@ -9,7 +9,7 @@
                 v-bind="props"
                 :icon="todo.icon"
             >
-              {{ `${todo.content.split(' ')[0]}...`  }}
+              <p :class="{ 'text-decoration-line-through': todo.done }">{{ `${todo.content.split(' ')[0]}...` }}</p>
             </v-btn>
           </template>
           <v-card min-width="300">
@@ -25,7 +25,7 @@
 
             <v-list>
               <v-list-item>
-                {{todo.content}}
+                {{ todo.content }}
               </v-list-item>
             </v-list>
 
@@ -63,6 +63,7 @@ import _ from 'lodash'
 import PriorityChip from "@/components/PriorityChip.vue";
 import dayjs from "dayjs";
 import TodoService from "@/services/todo.service";
+
 export default {
   name: "Inbox",
   components: {PriorityChip},
@@ -75,7 +76,7 @@ export default {
   computed: {
     sortedTodos() {
       const sortedTodos = _.sortBy(this.todos, 'insertedAt').reverse();
-      const nextTodo = _.minBy(sortedTodos, 'insertedAt')  || {};
+      const nextTodo = _.minBy(sortedTodos, 'insertedAt') || {};
       nextTodo.icon = 'mdi-star'
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.index = _.indexOf(sortedTodos, nextTodo);
@@ -93,21 +94,21 @@ export default {
     message: false,
     hints: true,
     options: [
-        {
-          description: "Detalhar",
-          icon: "mdi-minus-circle",
-          opened: false,
-        },
-        {
-          description: "Excluir",
-          icon: "mdi-minus-circle",
-          opened: false,
-        },
-        {
-          description: "Finalizar",
-          icon: "mdi-minus-circle",
-          opened: false,
-        }
+      {
+        description: "Detalhar",
+        icon: "mdi-minus-circle",
+        opened: false,
+      },
+      {
+        description: "Excluir",
+        icon: "mdi-minus-circle",
+        opened: false,
+      },
+      {
+        description: "Finalizar",
+        icon: "mdi-minus-circle",
+        opened: false,
+      }
     ]
   }),
   methods: {

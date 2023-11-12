@@ -6,7 +6,6 @@
 
 <script>
 import List from '@/components/List.vue'
-import TaskService from '@/services/task.service'
 
 export default {
   name: 'TaskListView',

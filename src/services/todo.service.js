@@ -1,6 +1,7 @@
 import HttpService from "@/services/http.service";
 import UserService from "@/services/user.service";
 import HttpStatus from "@/helpers/HttpStatus";
+import _ from 'lodash';
 
 export default class TodoService {
 
@@ -22,6 +23,8 @@ export default class TodoService {
             console.error(error);
             return [];
         }
+
+        _.sortBy(todos, ['done', 'insertedAt']).reverse();
         return todos;
     }
 
@@ -67,6 +70,15 @@ export default class TodoService {
 
     static async markAsDone(todo) {
         todo.done = true;
+        todo.userUuid = UserService.getUserUuid();
+
+        await this.update(todo);
+
+        return todo;
+    }
+
+    static async toggleDone(todo) {
+        todo.done = !todo.done;
         todo.userUuid = UserService.getUserUuid();
 
         await this.update(todo);

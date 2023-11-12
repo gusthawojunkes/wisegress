@@ -13,7 +13,7 @@
           <div>
             <v-card-item class="pa-0" style="white-space: pre-line">
               <v-card-text class="pa-0">
-                <p>{{ typeList === 'todo' ? task.content : task.description }}</p>
+                <p>{{ task.description }}</p>
               </v-card-text>
             </v-card-item>
             <PriorityChip :value="task.priority"></PriorityChip>
@@ -32,7 +32,7 @@ import SvgIcon from '@jamescoyle/vue-icon'
 import * as md from '@mdi/js'
 import PriorityChip from "@/components/PriorityChip.vue";
 export default {
-  name: 'ListItem',
+  name: 'TaskItem',
   props: {
     task: {
       type: Object,

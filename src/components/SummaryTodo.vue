@@ -8,7 +8,7 @@
         <span v-if="todos.length === 0">Não há nada aqui por enquanto!</span>
         <div  v-else v-for="(todo, index) in todos" :key="todo.uuid">
           <div class="d-flex justify-space-between" v-if="index < 3">
-            <span class="d-flex" style="margin-top: 15px"> {{todo.content}} </span>
+            <span class="d-flex" style="margin-top: 15px" :class="{ 'text-decoration-line-through': todo.done }"> {{todo.content}} </span>
             <PriorityChip :value="todo.priority"></PriorityChip>
           </div>
         </div>
