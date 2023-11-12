@@ -88,7 +88,6 @@ import TodoService from "@/services/todo.service";
 import TodoItem from "@/components/TodoItem.vue";
 import {getDisplayLabels, getPriorityCode} from "@/helpers/PriorityHelper";
 import UserService from "@/services/user.service";
-import ConfirmDialog from "@/components/ConfirmDialog.vue";
 export default {
   name: 'TodoItemView',
   async mounted() {
@@ -189,7 +188,6 @@ export default {
     }
   },
   components: {
-    ConfirmDialog,
     TodoItem,
   }
 }

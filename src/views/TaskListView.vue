@@ -17,7 +17,8 @@ export default {
     return {
       previewMode: 'taskList',
       typeList: 'task',
-      tasks: []
+      tasks: [],
+      task: {}
     }
   },
   methods: {

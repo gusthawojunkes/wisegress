@@ -4,7 +4,7 @@
       <v-row justify="center">
         <v-dialog v-model="dialog" class="w-50">
           <template v-slot:activator="{ props }">
-            <v-btn class="btn-positive-action w-75 mb-12" v-bind="props">Nova {{ titleList }} </v-btn>
+            <v-btn class="btn-positive-action w-75 mb-12" v-bind="props">Nova {{ titleList }}</v-btn>
           </template>
           <v-card>
             <v-card-title>
@@ -16,21 +16,21 @@
                   <v-row>
                     <v-col cols="12">
                       <v-text-field label="Descrição" variant="outlined" required v-model="task.description"
-                        :rules="[rules.required]"></v-text-field>
+                                    :rules="[rules.required]"></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-select label="Prioridade*" variant="outlined" required v-model="task.priority"
-                        :rules="[rules.required]" :items="priority"></v-select>
+                                :rules="[rules.required]" :items="priority"></v-select>
                     </v-col>
                     <v-col cols="12" v-if="this.typeList === 'task'">
                       <v-text-field label="Data de vencimento" variant="outlined" required v-model="task.dueDate"
-                        :rules="[rules.required]" type="datetime-local">
+                                    :rules="[rules.required]" type="datetime-local">
                       </v-text-field>
                     </v-col>
                   </v-row>
                   <v-spacer></v-spacer>
                   <v-btn class="btn-positive-action mr-6" variant="text" @click="dialog = false" type="submit"
-                    :disabled="!form">
+                         :disabled="!form">
                     Salvar
                   </v-btn>
                   <v-btn class="btn-negative-action" variant="text" @click="dialog = false">
@@ -41,22 +41,73 @@
             </v-card-text>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="eventDialog" class="w-50">
+          <v-card>
+            <v-card-title>
+              <span>Novo agendamento</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-form v-model="eventForm">
+                  <v-row>
+                    <v-col cols="12">
+                      <v-textarea label="Descrição" variant="outlined" required v-model="event.description"
+                                    :rules="[rules.required]"></v-textarea>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-row>
+                        <v-col cols="6">
+                          <v-text-field label="De" variant="outlined" required v-model="event.dueDate"
+                                        :rules="[rules.required]" type="datetime-local">
+                          </v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-text-field label="Até" variant="outlined" required v-model="event.endDate"
+                                        :rules="[rules.required]" type="datetime-local">
+                          </v-text-field>
+                        </v-col>
+                      </v-row>
+
+                    </v-col>
+                  </v-row>
+                  <div class="d-flex justify-end">
+                    <v-btn class="btn-negative-action mr-6" variant="text" @click="closeEventDialog">
+                      Cancelar
+                    </v-btn>
+                    <v-btn class="btn-positive-action" variant="text" @click="createNewEvent(event)" type="submit"
+                           :disabled="!eventForm">
+                      Criar
+                    </v-btn>
+
+                  </div>
+
+                </v-form>
+              </v-container>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
       </v-row>
       <div v-for="task in tasks" :key="task.uuid">
-        <TaskItem :task="task" @taskDone="taskDone" @taskEdit="openTaskItemEditDialog" :previewMode="previewMode"
-          :typeList="typeList" />
+        <TaskItem :task="task"
+                  :previewMode="previewMode"
+                  :typeList="typeList"
+                  @taskDone="taskDone"
+                  @taskEdit="openTaskItemEditDialog"
+                  @createEvent="createEvent"
+        />
       </div>
     </v-col>
+
   </div>
 </template>
 
 <script>
 import TaskItem from '@/components/TaskItem.vue'
-import { getDisplayLabels, getPriorityCode } from "@/helpers/PriorityHelper";
+import {getDisplayLabels, getPriorityCode} from "@/helpers/PriorityHelper";
 
-import TaskService from '@/services/task.service'
-import TodoService from '@/services/todo.service'
+import TaskService from '@/services/task.service';
 import UserService from "@/services/user.service";
+import EventService from "@/services/event.service";
 
 export default {
   name: 'List',
@@ -88,8 +139,10 @@ export default {
   data() {
     return {
       form: false,
+      eventForm: false,
       dialog: false,
       selectedTaskItemUuid: '',
+      eventDialog: false,
       task: {
         uuid: '',
         description: '',
@@ -97,6 +150,10 @@ export default {
         dueDate: '',
         done: false,
         situation: this.taskSituation
+      },
+      event: {
+        startDate: undefined,
+        dueDate: undefined,
       },
       priority: getDisplayLabels(),
       tasksList: [],
@@ -107,12 +164,6 @@ export default {
     }
   },
   methods: {
-    filterTaskItem(task) {
-      if (this.filterSituation) {
-        return (!task.done)
-      }
-      return true
-    },
     async onSubmit(taskUuid) {
       try {
         if (taskUuid) {
@@ -143,17 +194,7 @@ export default {
         situation: task.situation.toUpperCase()
       }
 
-      if (this.typeList === 'task') {
-        await TaskService.create(itemToSave)
-      } else {
-        delete itemToSave.dueDate
-        delete itemToSave.situation
-        delete itemToSave.description
-        itemToSave.content = task.description
-
-        await TodoService.create(itemToSave)
-      }
-
+      await TaskService.create(itemToSave)
       this.updateList(task)
     },
     async editTaskItem(task) {
@@ -167,17 +208,7 @@ export default {
         situation: task.situation.toUpperCase()
       }
 
-      if (this.typeList === 'task') {
-        await TaskService.update(itemToEdit)
-      } else {
-        delete itemToEdit.dueDate
-        delete itemToEdit.situation
-        delete itemToEdit.description
-        itemToEdit.content = task.description
-
-        await TodoService.update(itemToEdit)
-      }
-
+      await TaskService.update(itemToEdit)
       this.updateList(task)
     },
     taskDone(task) {
@@ -191,14 +222,30 @@ export default {
     openTaskItemEditDialog(task) {
       this.dialog = true
       this.task = task
-
-      if (this.typeList !== 'task') {
-        this.task.description = task.content
-      }
     },
     updateList() {
       this.$emit('updateList', true);
     },
+    async createEvent(task) {
+      this.eventDialog = true;
+      this.event = task;
+    },
+    async createNewEvent(event) {
+      const newEvent = {
+        date: event.startDate,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        description: event.description,
+        userUuid: UserService.getUserUuid(),
+      }
+      console.log(newEvent);
+      this.event = {};
+      await EventService.create(newEvent)
+      this.closeEventDialog();
+    },
+    closeEventDialog() {
+      this.eventDialog = false;
+    }
   },
   components: {
     TaskItem
