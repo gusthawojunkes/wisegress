@@ -147,7 +147,6 @@ export default {
       this.todo = todo;
     },
     close() {
-      this.todo = {}
       this.dialog = false;
     }
   },
