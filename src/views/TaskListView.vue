@@ -6,29 +6,26 @@
 
 <script>
 import List from '@/components/List.vue'
+import TaskService from '@/services/task.service'
 
 export default {
   name: 'TaskListView',
+  async mounted() {
+    await this.updateList();
+  },
   data() {
     return {
       previewMode: 'task',
       typeList: 'task',
-      tasks: this.getTasks()
+      tasks: []
     }
   },
   methods: {
-    getTasks() {
-      return [{
-        uuid: '8849f9cb-8d2c-413d-85d0-ffec4c6cc4ea',
-        description: 'tche',
-        priority: 'HIGHEST',
-        situation: 'PENDING',
-        dueDate: '2024-12-12 01:01:00.000',
-        done: false,
-      }]
+    async getTasks() {
+      return await TaskService.findAll();
     },
-    updateList() {
-      this.tasks = this.getTasks() // GET
+    async updateList() {
+      this.tasks = await this.getTasks();
     }
   },
   components: {

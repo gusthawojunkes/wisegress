@@ -45,7 +45,6 @@ export default {
     },
     typeList: {
       type: String,
-      required: true,
       default: 'task'
     }
   },

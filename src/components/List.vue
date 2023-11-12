@@ -8,30 +8,19 @@
           </template>
           <v-card>
             <v-card-title>
-              <span class="text-h5" @click="clearListItem()">Nova {{ titleList }}</span>
+              <span class="text-h5" @click="clearTaskItem()">Nova {{ titleList }}</span>
             </v-card-title>
             <v-card-text>
               <v-container>
                 <v-form v-model="form" @submit.prevent="onSubmit(task.uuid)">
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field
-                          label="Descrição"
-                          variant="outlined"
-                          required
-                          v-model="task.description"
-                          :rules="[rules.required]"
-                      ></v-text-field>
+                      <v-text-field label="Descrição" variant="outlined" required v-model="task.description"
+                        :rules="[rules.required]"></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-select
-                          label="Prioridade*"
-                          variant="outlined"
-                          required
-                          v-model="task.priority"
-                          :rules="[rules.required]"
-                          :items="priority"
-                      ></v-select>
+                      <v-select label="Prioridade*" variant="outlined" required v-model="task.priority"
+                        :rules="[rules.required]" :items="priority"></v-select>
                     </v-col>
                     <v-col cols="12" v-if="this.typeList === 'task'">
                       <v-text-field label="Data de vencimento" variant="outlined" required v-model="task.dueDate"
@@ -54,15 +43,15 @@
         </v-dialog>
       </v-row>
       <div v-for="task in tasks" :key="task.uuid">
-        <ListItem v-if="filterSituation === task.done" :task="task" @taskDone="taskDone"
-          @taskEdit="openListItemEditDialog" :previewMode="previewMode" :typeList="typeList" />
+        <TaskItem :task="task" @taskDone="taskDone" @taskEdit="openTaskItemEditDialog" :previewMode="previewMode"
+          :typeList="typeList" />
       </div>
     </v-col>
   </div>
 </template>
 
 <script>
-import ListItem from '@/components/TaskItem.vue'
+import TaskItem from '@/components/TaskItem.vue'
 import { getDisplayLabels, getPriorityCode } from "@/helpers/PriorityHelper";
 
 import TaskService from '@/services/task.service'
@@ -89,22 +78,25 @@ export default {
     },
     typeList: {
       type: String,
-      required: true,
       default: 'task'
+    },
+    taskSituation: {
+      type: String,
+      default: 'PENDING'
     }
   },
   data() {
     return {
       form: false,
       dialog: false,
-      selectedListItemUuid: '',
+      selectedTaskItemUuid: '',
       task: {
         uuid: '',
         description: '',
         priority: '',
         dueDate: '',
         done: false,
-        situation: 'pending'
+        situation: this.taskSituation
       },
       priority: getDisplayLabels(),
       tasksList: [],
@@ -115,33 +107,41 @@ export default {
     }
   },
   methods: {
+    filterTaskItem(task) {
+      console.log(task)
+      if (this.filterSituation) {
+        return (!task.done)
+      }
+      return true
+    },
     async onSubmit(taskUuid) {
       try {
         if (taskUuid) {
-          await this.editListItem(this.task)
+          await this.editTaskItem(this.task)
         } else {
-          await this.addListItem(this.task)
+          await this.addTaskItem(this.task)
         }
       } catch (error) {
         console.log(`Error: ${error.message}`)
       }
-      this.clearListItem()
+      this.clearTaskItem()
     },
-    clearListItem() {
+    clearTaskItem() {
       this.task = {
         uuid: '',
         description: '',
         priority: '',
         done: false,
-        situation: 'pending'
+        situation: this.taskSituation
       }
     },
-    async addListItem(task) {
+    async addTaskItem(task) {
       let itemToSave = {
         description: task.description,
         priority: getPriorityCode(task.priority),
         dueDate: task.dueDate,
-        userUuid: UserService.getUserUuid()
+        userUuid: UserService.getUserUuid(),
+        situation: task.situation.toUpperCase()
       }
 
       if (this.typeList === 'task') {
@@ -157,7 +157,7 @@ export default {
 
       this.updateList(task)
     },
-    async editListItem(task) {
+    async editTaskItem(task) {
       let itemToEdit = {
         uuid: task.uuid,
         userUuid: UserService.getUserUuid(),
@@ -165,6 +165,7 @@ export default {
         done: task.done,
         dueDate: task.dueDate,
         priority: getPriorityCode(task.priority),
+        situation: task.situation.toUpperCase()
       }
 
       if (this.typeList === 'task') {
@@ -183,11 +184,11 @@ export default {
     taskDone(task) {
       task.done = true
 
-      this.editListItem(task)
+      this.editTaskItem(task)
 
       this.updateList(task)
     },
-    openListItemEditDialog(task) {
+    openTaskItemEditDialog(task) {
       this.dialog = true
       this.task = task
 
@@ -196,11 +197,11 @@ export default {
       }
     },
     updateList() {
-      this.$emit('updateList');
+      this.$emit('updateList', true);
     },
   },
   components: {
-    ListItem
+    TaskItem
   },
 }
 </script>
