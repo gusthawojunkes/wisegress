@@ -52,7 +52,7 @@
 
 <script>
 import TaskItem from '@/components/TaskItem.vue'
-import { getDisplayLabels, getPriorityCode } from "@/helpers/PriorityHelper";
+import { getDisplayLabels, getPriorityCode, getPriorityLabel } from "@/helpers/PriorityHelper";
 
 import TaskService from '@/services/task.service'
 import TodoService from '@/services/todo.service'
@@ -191,6 +191,7 @@ export default {
     openTaskItemEditDialog(task) {
       this.dialog = true
       this.task = task
+      this.task.priority = getPriorityLabel(task.priority)
 
       if (this.typeList !== 'task') {
         this.task.description = task.content
