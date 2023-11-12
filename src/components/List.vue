@@ -74,7 +74,7 @@ export default {
     previewMode: {
       type: String,
       required: true,
-      default: 'task'
+      default: 'typeList'
     },
     typeList: {
       type: String,
@@ -108,7 +108,6 @@ export default {
   },
   methods: {
     filterTaskItem(task) {
-      console.log(task)
       if (this.filterSituation) {
         return (!task.done)
       }
@@ -183,6 +182,7 @@ export default {
     },
     taskDone(task) {
       task.done = true
+      task.situation = 'done'
 
       this.editTaskItem(task)
 

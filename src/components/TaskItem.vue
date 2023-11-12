@@ -3,13 +3,11 @@
     <v-card class="mt-4" :draggable="previewMode === 'kanban'" @dragstart="dragStart($event, task)">
       <div class="h-100 d-flex align-center justify-space-between pa-6">
         <div class="h-100 d-flex align-center">
-          <v-hover v-if="previewMode === 'taskList'">
-            <template v-slot:default="{ isHovering, props }">
-              <v-btn class="ml-6 mr-6 btn-positive-action" variant="outlined" v-bind="props"
-                :text="isHovering ? '✔' : undefined" @click="done()">
-              </v-btn>
-            </template>
-          </v-hover>
+          <v-radio v-if="previewMode === 'taskList'" class="mr-6" :value="one" @click="done()" color="#4e6c80">
+            <v-tooltip activator="parent" location="top">
+              Marcar como concluído
+            </v-tooltip>
+          </v-radio>
           <div>
             <v-card-item class="pa-0" style="white-space: pre-line">
               <v-card-text class="pa-0">
@@ -21,6 +19,9 @@
         </div>
         <v-btn class="ma-0" variant="plain" @click="edit()">
           <svg-icon :path="pathEdit" color="#47667B" float="rigth" size="25" type="mdi"></svg-icon>
+          <v-tooltip activator="parent" location="top">
+            Editar
+          </v-tooltip>
         </v-btn>
       </div>
     </v-card>
@@ -31,6 +32,7 @@
 import SvgIcon from '@jamescoyle/vue-icon'
 import * as md from '@mdi/js'
 import PriorityChip from "@/components/PriorityChip.vue";
+
 export default {
   name: 'TaskItem',
   props: {
@@ -45,7 +47,7 @@ export default {
     },
     typeList: {
       type: String,
-      default: 'task'
+      default: 'taskList'
     }
   },
   components: {
@@ -54,10 +56,7 @@ export default {
   },
   data() {
     return {
-      isHovering: false,
-      custom: false,
       pathEdit: md.mdiPencil,
-      isChecked: false,
       taskUsed: this.task
     }
   },

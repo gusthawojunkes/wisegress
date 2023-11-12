@@ -32,7 +32,7 @@ export default {
         },
         {
           id: 'DONE',
-          title: 'Feito'
+          title: 'Concluído'
         }
       ],
       tasks: []
@@ -56,7 +56,6 @@ export default {
         uuid: draggedTask.uuid,
         userUuid: UserService.getUserUuid(),
         description: draggedTask.description,
-        done: draggedTask.done,
         dueDate: draggedTask.dueDate,
         priority: getPriorityCode(draggedTask.priority),
         situation: draggedTask.situation.toUpperCase()
@@ -64,11 +63,13 @@ export default {
 
       if (itemToEdit.situation == 'DONE') {
         itemToEdit.done = true
+      } else {
+        itemToEdit.done = false
       }
+
       await TaskService.update(itemToEdit)
 
       await this.updateList();
-      console.log(this.tasks)
     },
     async getTasks() {
       return await TaskService.findAll();

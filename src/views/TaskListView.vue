@@ -1,6 +1,6 @@
 <template>
   <v-container class="w-50 pt-12">
-    <List :previewMode="previewMode" :tasks="tasks" @updateList="updateList" :typeList="typeList" />
+    <List :previewMode="previewMode" :tasks="getUndoneTasks()" @updateList="updateList" :typeList="typeList" />
   </v-container>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      previewMode: 'task',
+      previewMode: 'taskList',
       typeList: 'task',
       tasks: []
     }
@@ -26,6 +26,9 @@ export default {
     },
     async updateList() {
       this.tasks = await this.getTasks();
+    },
+    getUndoneTasks() {
+      return this.tasks.filter(task => task.done != true);
     }
   },
   components: {
