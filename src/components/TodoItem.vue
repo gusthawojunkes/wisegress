@@ -13,6 +13,15 @@
           </div>
         </div>
         <div>
+          <v-btn class="ma-0" variant="text" @click="remove()" :disabled="todo.done === true">
+            <v-icon color="red">mdi-delete</v-icon>
+            <v-tooltip
+                activator="parent"
+                location="top"
+            >
+              Excluir
+            </v-tooltip>
+          </v-btn>
           <v-btn class="ma-0" variant="text" @click="done()">
             <v-icon :color="todo.done === true ? 'red' : 'green'">{{ todo.done === true ? "mdi-undo" : "mdi-check" }}</v-icon>
             <v-tooltip
@@ -64,6 +73,9 @@ export default {
     edit() {
       this.$emit('edit', this.todo);
     },
+    remove() {
+      this.$emit('remove', this.todo);
+    }
   }
 }
 </script>

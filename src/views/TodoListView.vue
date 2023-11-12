@@ -52,9 +52,32 @@
             </v-card-text>
           </v-card>
         </v-dialog>
+        <v-dialog persistent width="auto" v-model="removeDialog">
+          <v-card>
+            <v-card-title class="text-h5">
+              Deseja realmente excluir essa pendência?
+            </v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                  variant="text"
+                  @click="closeConfirmRemoveDialog"
+              >
+                Não
+              </v-btn>
+              <v-btn
+                  color="#47667b"
+                  variant="text"
+                  @click="deleteTodo"
+              >
+                Sim
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-row>
       <div v-for="todo in todos" :key="todo.uuid">
-        <TodoItem :todo="todo" @done="markAsDone" @edit="openEditDialog"/>
+        <TodoItem :todo="todo" @done="markAsDone" @edit="openEditDialog" @remove="confirmRemove"/>
       </div>
     </v-col>
   </v-container>
@@ -65,6 +88,7 @@ import TodoService from "@/services/todo.service";
 import TodoItem from "@/components/TodoItem.vue";
 import {getDisplayLabels, getPriorityCode} from "@/helpers/PriorityHelper";
 import UserService from "@/services/user.service";
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
 export default {
   name: 'TodoItemView',
   async mounted() {
@@ -74,6 +98,7 @@ export default {
     return {
       form: false,
       dialog: false,
+      removeDialog: false,
       todos: [],
       todo: {
         uuid: '',
@@ -146,11 +171,25 @@ export default {
       this.dialog = true
       this.todo = todo;
     },
+    confirmRemove(todo) {
+      this.removeDialog = true;
+      this.todo = todo;
+    },
+    closeConfirmRemoveDialog() {
+      this.removeDialog = false;
+      this.todo = {}
+    },
+    async deleteTodo() {
+      await TodoService.delete(this.todo.uuid);
+      this.closeConfirmRemoveDialog();
+      await this.updateList();
+    },
     close() {
       this.dialog = false;
     }
   },
   components: {
+    ConfirmDialog,
     TodoItem,
   }
 }
