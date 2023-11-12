@@ -12,7 +12,7 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn icon="mdi-cog" variant="text" class="ms-2"></v-btn>
+      <v-btn icon="mdi-cog" variant="text" class="ms-2" @click="goToUserConfiguration"></v-btn>
     </v-system-bar>
   </v-layout>
 </template>
@@ -25,5 +25,10 @@ export default {
     Pomodoro
   },
   data: () => ({}),
+  methods: {
+    async goToUserConfiguration() {
+      this.$router.push('/configurations');
+    }
+  }
 }
 </script>

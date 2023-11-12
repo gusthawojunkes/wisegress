@@ -15,8 +15,8 @@
                 <v-form v-model="form" @submit.prevent="onSubmit(task.uuid)">
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field label="Descrição" variant="outlined" required v-model="task.description"
-                                    :rules="[rules.required]"></v-text-field>
+                      <v-textarea label="Descrição" variant="outlined" required v-model="task.description"
+                                    :rules="[rules.required]"></v-textarea>
                     </v-col>
                     <v-col cols="12">
                       <v-select label="Prioridade*" variant="outlined" required v-model="task.priority"
@@ -154,6 +154,7 @@ export default {
       event: {
         startDate: undefined,
         dueDate: undefined,
+        endDate: undefined,
       },
       priority: getDisplayLabels(),
       tasksList: [],

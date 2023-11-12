@@ -66,12 +66,10 @@ export default {
     }
   },
   components: {
-    PriorityChip,
-    SvgIcon
+    PriorityChip
   },
   data() {
     return {
-      pathEdit: md.mdiPencil,
       taskUsed: this.task
     }
   },
