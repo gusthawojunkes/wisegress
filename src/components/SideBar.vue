@@ -38,11 +38,6 @@ export default {
                     icon: 'mdi-list-box-outline'
                 },
                 {
-                    title: 'Pomodoro',
-                    path: '/pomodoro',
-                    icon: 'mdi-clock-outline'
-                },
-                {
                     title: 'Agenda',
                     path: '/agenda',
                     icon: 'mdi-calendar-month'

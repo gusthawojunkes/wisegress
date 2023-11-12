@@ -1,6 +1,6 @@
 <template>
-    <v-container class="h-screen d-flex align-center w-50">
-        <v-col cols="4" class="text-center">
+    <v-container >
+        <v-col class="text-center">
             <v-row class="d-flex align-center justify-center mb-6">
                 <h1 class="text-h1">{{ minutes }}:{{ seconds }}</h1>
             </v-row>
@@ -21,9 +21,6 @@
                 <v-spacer></v-spacer>
                 <v-btn icon="mdi-refresh" @click="restart()"></v-btn>
             </v-row>
-        </v-col>
-        <v-col cols="8" class="ml-12">
-            <List :previewMode="previewMode" :tasks="tasks" @updateList="updateList"  type-list="todo"/>
         </v-col>
     </v-container>
 </template>

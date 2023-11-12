@@ -73,15 +73,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/pomodoro',
-      name: 'Pomodoro',
-      component: Pomodoro,
-      icon: 'mdiClockOutline',
-      meta: {
-        showSidebar: true
-      }
-    },
-    {
       path: '/kanban',
       name: 'KanbanBoard',
       component: KanbanBoard,

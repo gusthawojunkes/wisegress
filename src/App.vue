@@ -1,22 +1,25 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import {RouterView} from 'vue-router'
 </script>
 
 <template>
   <template v-if="$route.meta.showSidebar">
-    <SideBar />
+    <SystemBar></SystemBar>
+    <SideBar/>
     <Inbox v-if="$route.meta.hideFixedTodos === undefined" :todos="todos"></Inbox>
   </template>
-  <RouterView />
+  <RouterView/>
 </template>
 
 <script>
 import SideBar from '@/components/SideBar.vue'
 import Inbox from '@/components/Inbox.vue'
 import TodoService from "@/services/todo.service";
+import SystemBar from "@/components/SystemBar.vue";
+
 export default {
   components: {
-    SideBar, Inbox
+    SideBar, Inbox, SystemBar
   },
   async mounted() {
     await this.findTodos();
@@ -26,8 +29,13 @@ export default {
       this.todos = await TodoService.findAll();
     }
   },
-  data: () => ({ todos: [] }),
+  data: () => ({
+    todos: [],
+    button: {
+      open: true,
+    }
+  }),
 }
-</script >
+</script>
 
 <style scoped></style>
