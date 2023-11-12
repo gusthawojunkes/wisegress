@@ -3,7 +3,7 @@ import UserService from "@/services/user.service";
 
 export default class HttpService {
     static async post(url, data, headers = undefined) {
-        console.log(`Requesting to: ${url}`);
+        console.log(`[POST] Requesting to: ${url}`);
         headers = this.configureHeaders(headers);
         return axios.post(url, data, {
             headers
@@ -11,7 +11,7 @@ export default class HttpService {
     }
 
     static async get(url, headers = undefined) {
-        console.log(`Requesting to: ${url}`);
+        console.log(`[GET] Requesting to: ${url}`);
         headers = this.configureHeaders(headers);
         return axios.get(url,{
             headers
@@ -19,7 +19,7 @@ export default class HttpService {
     }
 
     static async put(url, data, headers = undefined) {
-        console.log(`Requesting to: ${url}`);
+        console.log(`[PUT] Requesting to: ${url}`);
         headers = this.configureHeaders(headers);
         return axios.put(url, data, {
             headers
@@ -27,7 +27,7 @@ export default class HttpService {
     }
 
     static async delete(url, headers = undefined) {
-        console.log(`Requesting to: ${url}`);
+        console.log(`[DELETE] Requesting to: ${url}`);
         headers = this.configureHeaders(headers);
         return axios.delete(url,{
             headers
