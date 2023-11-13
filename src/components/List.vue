@@ -238,18 +238,18 @@ export default {
     },
     async createNewEvent(event) {
       const newEvent = {
-        date: event.startDate,
-        startDate: event.startDate,
+        date: event.dueDate,
+        startDate: event.dueDate,
         endDate: event.endDate,
         description: event.description,
         userUuid: UserService.getUserUuid(),
       }
       console.log(newEvent);
-      this.event = {};
       await EventService.create(newEvent)
       this.closeEventDialog();
     },
     closeEventDialog() {
+      this.event = {};
       this.eventDialog = false;
     }
   },

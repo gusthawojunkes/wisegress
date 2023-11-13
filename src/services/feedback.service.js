@@ -17,7 +17,8 @@ export default class FeedbackService {
 
     static async getClassifications() {
         try {
-            await HttpService.get(`/feedback/calculate/${UserService.getUserUuid()}`);
+            const response = await HttpService.get(`/feedback/calculate/${UserService.getUserUuid()}`);
+            return response.data;
         } catch (error) {
             console.error(error);
             return [];

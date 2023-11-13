@@ -16,9 +16,11 @@
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^7.3.67",
     "axios": "^1.5.0",
+    "chart.js": "^4.4.0",
     "dayjs": "^1.11.10",
     "lodash": "^4.17.21",
     "vue": "^3.3.4",
+    "vue-chartjs": "^5.2.0",
     "vue-pro-calendar": "^1.1.9",
     "vue-router": "^4.2.4",
     "vuetify": "^3.3.16"
