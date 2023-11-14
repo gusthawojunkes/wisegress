@@ -44,7 +44,7 @@
       </v-row>
       <div v-for="task in tasks" :key="task.uuid">
         <TaskItem :task="task" @taskDone="taskDone" @taskEdit="openTaskItemEditDialog" :previewMode="previewMode"
-          :typeList="typeList" />
+          :typeList="typeList" :feature="feature" />
       </div>
     </v-col>
   </div>
@@ -83,6 +83,9 @@ export default {
     taskSituation: {
       type: String,
       default: 'PENDING'
+    },
+    feature: {
+      type: String,
     }
   },
   data() {

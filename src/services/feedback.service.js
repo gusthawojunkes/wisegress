@@ -6,7 +6,7 @@ export default class FeedbackService {
         try {
             await HttpService.post('/feedback', {
                 feature: feedback.feature,
-                rating: feedback.feature,
+                rating: feedback.rating,
                 description: feedback.description,
                 userUuid: UserService.getUserUuid()
             });

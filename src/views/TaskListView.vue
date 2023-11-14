@@ -1,6 +1,7 @@
 <template>
   <v-container class="w-50 pt-12">
-    <List :previewMode="previewMode" :tasks="getUndoneTasks()" @updateList="updateList" :typeList="typeList" />
+    <List :previewMode="previewMode" :tasks="getUndoneTasks()" @updateList="updateList" :typeList="typeList"
+      :feature="feature" />
   </v-container>
 </template>
 
@@ -17,6 +18,7 @@ export default {
     return {
       previewMode: 'taskList',
       typeList: 'task',
+      feature: 'LIST',
       tasks: []
     }
   },
