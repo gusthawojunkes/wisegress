@@ -18,13 +18,13 @@
                 <v-form v-model="form" @submit.prevent="onSubmit(todo.uuid)">
                   <v-row>
                     <v-col cols="12">
-                      <v-text-field
+                      <v-textarea
                           label="Descrição"
                           variant="outlined"
                           required
                           v-model="todo.content"
                           :rules="[rules.required]"
-                      ></v-text-field>
+                      ></v-textarea>
                     </v-col>
                     <v-col cols="12">
                       <v-select
@@ -88,7 +88,6 @@ import TodoService from "@/services/todo.service";
 import TodoItem from "@/components/TodoItem.vue";
 import {getDisplayLabels, getPriorityCode} from "@/helpers/PriorityHelper";
 import UserService from "@/services/user.service";
-import ConfirmDialog from "@/components/ConfirmDialog.vue";
 export default {
   name: 'TodoItemView',
   async mounted() {
@@ -189,7 +188,6 @@ export default {
     }
   },
   components: {
-    ConfirmDialog,
     TodoItem,
   }
 }

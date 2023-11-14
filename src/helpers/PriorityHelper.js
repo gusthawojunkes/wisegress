@@ -6,7 +6,7 @@ const LABELS = {
     "LOWEST": "Baixíssima"
 };
 
-const COLORS = {
+export const COLORS = {
     "HIGHEST": "red",
     "HIGH": "orange",
     "MEDIUM": "primary",

@@ -4,12 +4,12 @@ import Register from '@/views/Register.vue'
 import Login from '@/views/Login.vue'
 import ProfileRegister from '@/views/ProfileRegister.vue'
 import Task from '@/views/Task.vue'
-import Pomodoro from '@/views/Pomodoro.vue'
 import KanbanBoard from '@/views/KanbanBoard.vue'
 import Dashboard from "@/views/Dashboard.vue";
 import UserService from "@/services/user.service";
 import Calendar from "@/views/Calendar.vue";
 import TodoListView from "@/views/TodoListView.vue";
+import Configuration from "@/views/Configuration.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,7 +18,7 @@ const router = createRouter({
       path: '/',
       name: 'Welcome',
       component: Welcome,
-      icon: 'mdiHome',
+      icon: 'mdi-home',
       meta: {
         showSidebar: false,
         hideFixedTodos: true
@@ -28,7 +28,7 @@ const router = createRouter({
       path: '/cadastro',
       name: 'Register',
       component: Register,
-      icon: 'mdiAccountCircle',
+      icon: 'mdi-account-circle',
       meta: {
         showSidebar: false,
         hideFixedTodos: true
@@ -38,7 +38,7 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: Login,
-      icon: 'mdiLogin',
+      icon: 'mdi-login',
       meta: {
         showSidebar: false,
         hideFixedTodos: true
@@ -48,7 +48,7 @@ const router = createRouter({
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
-      icon: 'mdiDashboard',
+      icon: 'mdi-dashboard',
       meta: {
         showSidebar: true,
         hideFixedTodos: true
@@ -58,7 +58,7 @@ const router = createRouter({
       path: '/cadastro-perfil',
       name: 'ProfileRegister',
       component: ProfileRegister,
-      icon: 'mdiAccountFileText',
+      icon: 'mdi-account-file-text',
       meta: {
         showSidebar: false
       }
@@ -67,7 +67,7 @@ const router = createRouter({
       path: '/tasks',
       name: 'Task',
       component: Task,
-      icon: 'mdiListBoxOutline',
+      icon: 'mdi-list-box-outline',
       meta: {
         showSidebar: true
       }
@@ -76,7 +76,7 @@ const router = createRouter({
       path: '/kanban',
       name: 'KanbanBoard',
       component: KanbanBoard,
-      icon: 'mdiDeveloperBoard',
+      icon: 'mdi-developer-board',
       meta: {
         showSidebar: true
       }
@@ -85,7 +85,7 @@ const router = createRouter({
       path: '/agenda',
       name: 'Agenda',
       component: Calendar,
-      icon: 'mdiCalendarMonth',
+      icon: 'mdi-calendar-month',
       meta: {
         showSidebar: true
       }
@@ -94,12 +94,21 @@ const router = createRouter({
       path: '/todo',
       name: 'Todo',
       component: TodoListView,
-      icon: 'mdiFlagCheckered',
+      icon: 'mdi-flag-checkered',
       meta: {
         showSidebar: true,
         hideFixedTodos: true
       }
     },
+    {
+      path: "/configurations",
+      name: "Configurações",
+      component: Configuration,
+      icon: "mdi-cog",
+      meta: {
+        showSidebar: true,
+      }
+    }
   ]
 })
 

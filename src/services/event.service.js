@@ -1,6 +1,7 @@
 import UserService from "@/services/user.service";
 import HttpService from "@/services/http.service";
 import HttpStatus from "@/helpers/HttpStatus";
+import _ from "lodash";
 
 export default class EventService {
 
@@ -18,14 +19,15 @@ export default class EventService {
         const events = [];
         try {
             const response = await HttpService.get(url);
-            response.data.forEach((event) => {
-                events.push(this.prepare(event));
+            response.data.forEach((item) => {
+                events.push(this.prepare(item));
             });
 
         } catch (error) {
             console.error(error);
             return [];
         }
+        _.sortBy(events, 'insertedAt').reverse();
         return events;
     }
 

@@ -1,6 +1,6 @@
 <template>
-  <v-container class="align-center w-50">
-    <v-row no-gutters>
+  <v-container>
+    <v-row>
       <v-col cols="11">
       <span>
         Hoje
@@ -33,8 +33,19 @@
     </v-row>
 
     <v-row>
-      <v-col cols="12">
-        <SummaryTodo :todos="todos"></SummaryTodo>
+      <v-col cols="8">
+        <SummaryTodo width="87%" :todos="todos"></SummaryTodo>
+      </v-col>
+      <v-col cols="4">
+        <NextEvents></NextEvents>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="8" class="d-flex justify-centers">
+        <FeedbackChart :classifications="classifications"></FeedbackChart>
+      </v-col>
+      <v-col cols="4">
+        b
       </v-col>
     </v-row>
   </v-container>
@@ -45,6 +56,8 @@ import dayjs from 'dayjs'
 import TodoService from "@/services/todo.service";
 import SummaryTodo from "@/components/SummaryTodo.vue";
 import FeedbackService from "@/services/feedback.service";
+import NextEvents from "@/components/NextEvents.vue";
+import FeedbackChart from "@/components/FeedbackChart.vue";
 export default {
 
   name: 'Dashboard',
@@ -70,7 +83,9 @@ export default {
     }
   },
   components: {
-    SummaryTodo
+    NextEvents,
+    SummaryTodo,
+    FeedbackChart
   }
 }
 </script>

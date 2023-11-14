@@ -19,7 +19,8 @@ export default {
       previewMode: 'taskList',
       typeList: 'task',
       feature: 'LIST',
-      tasks: []
+      tasks: [],
+      task: {}
     }
   },
   methods: {
@@ -30,7 +31,7 @@ export default {
       this.tasks = await this.getTasks();
     },
     getUndoneTasks() {
-      return this.tasks.filter(task => task.done != true);
+      return this.tasks.filter(task => task.done !== true);
     }
   },
   components: {

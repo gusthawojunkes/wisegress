@@ -18,12 +18,27 @@
             <PriorityChip :value="task.priority"></PriorityChip>
           </div>
         </div>
-        <v-btn class="ma-0" variant="plain" @click="edit()">
-          <svg-icon :path="pathEdit" color="#47667B" float="rigth" size="25" type="mdi"></svg-icon>
-          <v-tooltip activator="parent" location="top">
-            Editar
-          </v-tooltip>
-        </v-btn>
+        <div>
+          <v-btn class="ma-0" variant="text" @click="turnIntoEvent()" :disabled="task.done === true">
+            <v-icon color="grey">mdi-calendar-clock</v-icon>
+            <v-tooltip
+                activator="parent"
+                location="top"
+            >
+              Criar um agendamento para essa tarefa!
+            </v-tooltip>
+          </v-btn>
+          <v-btn class="ma-0" variant="text" @click="edit()" :disabled="task.done === true">
+            <v-icon color="grey">mdi-pencil</v-icon>
+            <v-tooltip
+                activator="parent"
+                location="top"
+            >
+              Editar
+            </v-tooltip>
+          </v-btn>
+        </div>
+
       </div>
     </v-card>
   </div>
@@ -76,6 +91,9 @@ export default {
       this.isHovering = false
       this.taskUsed.done = true
       this.$emit('taskDone', this.taskUsed)
+    },
+    turnIntoEvent() {
+      this.$emit('createEvent', this.taskUsed)
     }
   },
   components: {
