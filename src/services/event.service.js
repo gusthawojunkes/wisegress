@@ -15,7 +15,9 @@ export default class EventService {
         }
     }
     static async findAll() {
-        const url = `/event/all/${UserService.getUserUuid()}`;
+        const userUuid = UserService.getUserUuid();
+        if (!userUuid) return [];
+        const url = `/event/all/${userUuid}`;
         const events = [];
         try {
             const response = await HttpService.get(url);

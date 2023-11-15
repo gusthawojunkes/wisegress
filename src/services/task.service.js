@@ -5,7 +5,9 @@ import HttpStatus from "@/helpers/HttpStatus";
 export default class TaskService {
 
     static async findAll() {
-        const url = `/task/all/${UserService.getUserUuid()}`;
+        const userUuid = UserService.getUserUuid();
+        if (!userUuid) return [];
+        const url = `/task/all/${userUuid}`;
         const tasks = [];
         try {
             const response = await HttpService.get(url);

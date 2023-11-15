@@ -112,11 +112,10 @@ const router = createRouter({
   ]
 })
 
-const isAuthenticated = UserService.isAuthenticated();
-const publicRoutes = ['Welcome', 'Register', 'Login']
-// GOOD
+const publicRoutes = ['Welcome', 'Register', 'Login'];
 router.beforeEach((to, from, next) => {
-  if (!publicRoutes.includes(to.name) && !isAuthenticated) next({ name: 'Login' })
+  localStorage.setItem("LAST_ROUTE", from.path);
+  if (!publicRoutes.includes(to.name) && !UserService.isAuthenticated()) next({ name: 'Login' })
   else next()
 })
 

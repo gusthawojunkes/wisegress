@@ -72,9 +72,7 @@ export default {
                 email: this.email,
                 password: this.password
               });
-              setTimeout(() => {
-                this.$router.push('/dashboard')
-              }, 1000);
+              await this.$router.push('/dashboard');
             } catch (error) {
                 console.error(error);
                 let message = 'Erro ao realizar o Login!';

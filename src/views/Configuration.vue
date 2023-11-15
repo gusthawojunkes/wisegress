@@ -97,6 +97,49 @@
       </v-col>
 
     </v-row>
+
+    <v-row>
+      <v-col cols="6" style="padding-left: 0">
+        <v-combobox
+            v-model="selectedWeekdays"
+            :items="possibleWeekdays"
+            label="Dias de limpeza"
+            multiple
+        >
+          <template v-slot:selection="data">
+            <v-chip
+                :key="JSON.stringify(data.item)"
+                v-bind="data.attrs"
+                :model-value="data.selected"
+                :disabled="data.disabled"
+                size="small"
+                @click:close="data.parent.selectItem(data.item)"
+            >
+              <template v-slot:prepend>
+                <v-avatar
+                    color="#47667b"
+                    class="bg-accent text-uppercase"
+                    start
+                >{{ data.item.title.slice(0, 1) }}
+                </v-avatar>
+              </template>
+              {{ data.item.title }}
+            </v-chip>
+          </template>
+        </v-combobox>
+      </v-col>
+      <v-col cols="3">
+
+      </v-col>
+      <v-col cols="3">
+
+      </v-col>
+      <v-col cols="3">
+
+      </v-col>
+
+    </v-row>
+
     <v-row class="d-flex justify-end">
       <v-btn prepend-icon="mdi-content-save-all">
         Salvar
@@ -109,6 +152,8 @@
 <script>
 import UserService from "@/services/user.service";
 import {LABELS} from "@/helpers/Status";
+import Time from "@/helpers/Time";
+import User from "@/helpers/User";
 
 export default {
   name: "Configuration",
@@ -122,7 +167,9 @@ export default {
       user: UserService.getUser(),
       rules: {
         required: value => !!value || 'Campo obrigatório!',
-      }
+      },
+      selectedWeekdays: User.defaultSelectedWeekdays(),
+      possibleWeekdays: Object.values(Time.weekdays()),
     }
   }
 }

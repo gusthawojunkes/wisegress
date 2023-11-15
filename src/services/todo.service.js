@@ -11,7 +11,9 @@ export default class TodoService {
     }
 
     static async findAll() {
-        const url = `/todo/all/${UserService.getUserUuid()}`;
+        const userUuid = UserService.getUserUuid();
+        if (!userUuid) return [];
+        const url = `/todo/all/${userUuid}`;
         const todos = [];
         try {
             const response = await HttpService.get(url);
