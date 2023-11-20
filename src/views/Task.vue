@@ -16,6 +16,13 @@
                             <v-icon v-if="item.recomendation" color="yellow" icon="mdi-star"></v-icon>
                             &nbsp;
                             {{ item.title }}
+                            <v-tooltip
+                                v-if="item.recomendation"
+                                activator="parent"
+                                location="start"
+                            >
+                              Nós recomendamos que você utilize esse modelo!
+                            </v-tooltip>
 
                         </v-btn>
                     </v-list-item-title>
