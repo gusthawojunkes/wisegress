@@ -1,36 +1,36 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="11">
-      <span>
-        Hoje
-        <small>({{(dayjs().format('DD/MM/YYYY'))}})</small>
-      </span>
-      </v-col>
-      <v-col cols="1">
-        <v-menu location="bottom">
-          <template v-slot:activator="{ props }">
-            <v-btn
-                color="#47667b"
-                icon="mdi-plus"
-                v-bind="props"
-            >
-            </v-btn>
-          </template>
+<!--    <v-row>-->
+<!--      <v-col cols="11">-->
+<!--      <span>-->
+<!--        Hoje-->
+<!--        <small>({{(dayjs().format('DD/MM/YYYY'))}})</small>-->
+<!--      </span>-->
+<!--      </v-col>-->
+<!--      <v-col cols="1">-->
+<!--        <v-menu location="bottom">-->
+<!--          <template v-slot:activator="{ props }">-->
+<!--            <v-btn-->
+<!--                color="#47667b"-->
+<!--                icon="mdi-plus"-->
+<!--                v-bind="props"-->
+<!--            >-->
+<!--            </v-btn>-->
+<!--          </template>-->
 
-          <v-list>
-            <v-list-item
-                v-for="(option, index) in options"
-                :key="index"
-            >
-              <v-list-item-title>
-                {{option}}
-              </v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </v-col>
-    </v-row>
+<!--          <v-list>-->
+<!--            <v-list-item-->
+<!--                v-for="(option, index) in options"-->
+<!--                :key="index"-->
+<!--            >-->
+<!--              <v-list-item-title>-->
+<!--                {{option}}-->
+<!--              </v-list-item-title>-->
+<!--            </v-list-item>-->
+<!--          </v-list>-->
+<!--        </v-menu>-->
+<!--      </v-col>-->
+<!--    </v-row>-->
 
     <v-row>
       <v-col cols="8">
