@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <Feedback :isHovering="isHovering" :feature="feature" @feedbackAdded="feedbackAdded" />
     <v-row class="d-flex justify-center h-100">
       <Column v-for="column in columns" :key="column.id" @dragover.prevent @drop="dragEnd($event, column)"
         :title="column.title" :tasks="filterTasks(column.id)" :filterSituation="column.id == 'DONE' ? false : true"
@@ -13,6 +14,7 @@ import Column from '@/components/Column.vue'
 import TaskService from "@/services/task.service";
 import UserService from "@/services/user.service";
 import { getPriorityCode } from "@/helpers/PriorityHelper";
+import Feedback from '@/components/Feedback.vue';
 
 export default {
   name: 'KanbanBoard',
@@ -21,6 +23,8 @@ export default {
   },
   data() {
     return {
+      isHovering: false,
+      feature: 'KANBAN',
       columns: [
         {
           id: 'PENDING',
@@ -39,6 +43,9 @@ export default {
     }
   },
   methods: {
+    feedbackAdded() {
+      this.isHovering = false
+    },
     filterTasks(situation) {
       let list = []
       if (this.tasks) {
@@ -70,6 +77,9 @@ export default {
       await TaskService.update(itemToEdit)
 
       await this.updateList();
+      if (itemToEdit.situation == 'DONE') {
+        this.isHovering = true
+      }
     },
     async getTasks() {
       return await TaskService.findAll();
@@ -79,7 +89,8 @@ export default {
     },
   },
   components: {
-    Column
+    Column,
+    Feedback
   },
 }
 </script>
