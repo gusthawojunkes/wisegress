@@ -1,23 +1,23 @@
 <template>
   <v-container>
     <Feedback :isHovering="isHovering" :feature="feature" @feedbackAdded="feedbackAdded" />
-    <v-col class="text-center d-flex flex-column justify-start" style="width: 75vh; height: 40vh;"></v-col>
-    <v-row class="d-flex align-center justify-center mb-6">
-      <h1 class="text-h1">{{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</h1>
-    </v-row>
-    <v-row class="d-flex align-center justify-center">
-      <v-col>Foco</v-col>
-      <v-col>
-        <v-switch class="col-switch" :model-value="isBreak" hide-details color="#F8F4C4"></v-switch>
-      </v-col>
-      <v-col>Pausa</v-col>
-    </v-row>
-    <v-row class=" d-flex align-center justify-center mt-6">
-      <v-btn class="w-50 btn-positive-action" size="large" :text="timeStopped ? `Começar` : `Parar`"
-        @click="switchTime()"></v-btn>
-      <v-spacer></v-spacer>
-      <v-btn icon="mdi-refresh" @click="restart()"></v-btn>
-    </v-row>
+    <v-col class="text-center d-flex flex-column justify-start" style="width: 75vh; height: 40vh;">
+      <v-row class="d-flex align-center justify-center mb-6">
+        <h1 class="text-h1">{{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</h1>
+      </v-row>
+      <v-row class="d-flex align-center justify-center">
+        <v-col>Foco</v-col>
+        <v-col>
+          <v-switch class="col-switch" :model-value="isBreak" hide-details color="#F8F4C4"></v-switch>
+        </v-col>
+        <v-col>Pausa</v-col>
+      </v-row>
+      <v-row class=" d-flex align-center justify-center mt-6">
+        <v-btn class="w-50 btn-positive-action" size="large" :text="timeStopped ? `Começar` : `Parar`"
+          @click="switchTime()"></v-btn>
+        <v-spacer></v-spacer>
+        <v-btn icon="mdi-refresh" @click="restart()"></v-btn>
+      </v-row>
     </v-col>
   </v-container>
 </template>
