@@ -39,4 +39,23 @@ export default class Time {
             6: "Sábado"
         }
     }
+
+    static getLowBreakGlobalTime() {
+        const value = localStorage.getItem("QTDLOWBREAKTIME");
+        return isNaN(value) ? 0 : Number(value);
+    }
+
+    static saveLowBreakGlobalTime(number) {
+        localStorage.setItem("QTDLOWBREAKTIME", number);
+    }
+
+    static getFocusGlobalTime() {
+        const value = localStorage.getItem("QTDFOCUSTIME");
+        return isNaN(value) ? 0 : Number(value);
+    }
+
+    static saveFocusGlobalTime(number) {
+        localStorage.setItem("QTDFOCUSTIME", number);
+    }
+
 }

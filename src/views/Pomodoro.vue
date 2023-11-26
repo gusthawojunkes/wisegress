@@ -1,26 +1,23 @@
 <template>
   <v-container>
-    <v-col class="text-center">
-      <v-row class="d-flex align-center justify-center mb-6">
-        <h1 class="text-h1">{{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</h1>
-      </v-row>
-      <v-row class="d-flex align-center justify-center">
-        <v-col>Foco</v-col>
-        <v-col>
-          <v-switch class="col-switch" :model-value="isBreak" hide-details color="#F8F4C4"></v-switch>
-        </v-col>
-        <v-col>Pausa</v-col>
-      </v-row>
-      <v-row class=" d-flex align-center justify-center mt-6">
-        <v-btn
-            class="w-50 btn-positive-action"
-            size="large"
-            :text="timeStopped ? `Começar` : `Parar`"
-            @click="switchTime()"
-        ></v-btn>
-        <v-spacer></v-spacer>
-        <v-btn icon="mdi-refresh" @click="restart()"></v-btn>
-      </v-row>
+    <Feedback :isHovering="isHovering" :feature="feature" @feedbackAdded="feedbackAdded" />
+    <v-col class="text-center d-flex flex-column justify-start" style="width: 75vh; height: 40vh;"></v-col>
+    <v-row class="d-flex align-center justify-center mb-6">
+      <h1 class="text-h1">{{ minutes }}:{{ seconds < 10 ? '0' + seconds : seconds }}</h1>
+    </v-row>
+    <v-row class="d-flex align-center justify-center">
+      <v-col>Foco</v-col>
+      <v-col>
+        <v-switch class="col-switch" :model-value="isBreak" hide-details color="#F8F4C4"></v-switch>
+      </v-col>
+      <v-col>Pausa</v-col>
+    </v-row>
+    <v-row class=" d-flex align-center justify-center mt-6">
+      <v-btn class="w-50 btn-positive-action" size="large" :text="timeStopped ? `Começar` : `Parar`"
+        @click="switchTime()"></v-btn>
+      <v-spacer></v-spacer>
+      <v-btn icon="mdi-refresh" @click="restart()"></v-btn>
+    </v-row>
     </v-col>
   </v-container>
 </template>
@@ -28,6 +25,7 @@
 <script>
 import UserService from "@/services/user.service";
 import Time from "@/helpers/Time";
+import Feedback from "@/components/Feedback.vue";
 
 export default {
   name: 'Pomodoro',
@@ -42,6 +40,9 @@ export default {
       numberBreakTime: 0,
       numberShortStops: 2,
       numberForLongStop: 3,
+      isHovering: false,
+      feature: 'POMODORO',
+      currentTime: 'focusTime'
     };
   },
   methods: {
@@ -56,26 +57,35 @@ export default {
         Time.savePomodoroGlobalTime(this.time);
         return this.time;
       } else {
-        this.numberBreakTime++;
 
-        if (this.numberBreakTime <= this.numberShortStops) {
-          this.time = this.shortBreakTime;
-          Time.savePomodoroGlobalTime(this.time);
-          this.switchTime()
-          this.isBreak = true;
-
-        } else if (this.numberBreakTime === this.numberForLongStop) {
+        if (this.numberBreakTime === this.numberShortStops) {
           this.time = this.longBreakTime;
           Time.savePomodoroGlobalTime(this.time);
           this.switchTime()
           this.isBreak = true;
 
-        } else if (this.numberBreakTime > this.numberForLongStop) {
+          this.setFeedBack(this.currentTime)
+          this.currentTime = 'longTime'
+          this.numberBreakTime = -1;
+
+        } else if (this.currentTime == 'focusTime') {
+          this.time = this.shortBreakTime;
+          Time.savePomodoroGlobalTime(this.time);
+          this.switchTime()
+          this.isBreak = true;
+
+          this.setFeedBack(this.currentTime)
+          this.currentTime = 'lowTime'
+
+        } else {
           this.time = this.timeFocus
           Time.savePomodoroGlobalTime(this.time);
-          this.numberBreakTime = 0;
           this.switchTime()
           this.isBreak = false;
+
+          this.setFeedBack(this.currentTime)
+          this.currentTime = 'focusTime'
+          this.numberBreakTime++;
         }
       }
     },
@@ -85,6 +95,30 @@ export default {
     restart() {
       this.timeStopped = true;
       this.time = this.timeFocus;
+    },
+    feedbackAdded() {
+      this.isHovering = false;
+    },
+    setFeedBack(timeType) {
+      let focusGlobalTime = Time.getFocusGlobalTime()
+      let lowBreakGlobalTime = Time.getLowBreakGlobalTime()
+
+      if ((focusGlobalTime == 3) && (lowBreakGlobalTime == 2)) {
+        this.isHovering = true;
+
+        Time.saveFocusGlobalTime(0)
+        Time.saveLowBreakGlobalTime(0)
+      } else {
+        if (timeType == 'focusTime') {
+          focusGlobalTime = focusGlobalTime + 1
+          Time.saveFocusGlobalTime(focusGlobalTime)
+        }
+        if (timeType == 'lowTime') {
+          lowBreakGlobalTime = lowBreakGlobalTime + 1
+          Time.saveLowBreakGlobalTime(lowBreakGlobalTime)
+        }
+        this.isHovering = false;
+      }
     }
   },
   computed: {
@@ -98,7 +132,7 @@ export default {
   async mounted() {
     // this.time = Time.getPomodoroActualTime();
     setInterval(this.updateTime, 1000);
-    const {duration, shortbreakDuration, longbreakDuration} = UserService.getPomodoroConfiguration();
+    const { duration, shortbreakDuration, longbreakDuration } = UserService.getPomodoroConfiguration();
     if (!this.time) {
       this.time = Time.minutesToSeconds(duration);
     }
@@ -113,6 +147,10 @@ export default {
       Time.saveUnmountTimestamp();
     }
     Time.savePomodoroGlobalTime(this.time);
+  },
+
+  components: {
+    Feedback
   }
 };
 </script>
