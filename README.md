@@ -1,57 +1,50 @@
 # wisegress
 
-This template should help get you started developing with Vue 3 in Vite.
+## Documentação do Artigo
 
-## Recommended IDE Setup
+### Diagrama de Fluxo
+Segue o [link](https://drive.google.com/file/d/1R775cwLXXTAqRhhhp6gZSysUJLNLnm65/view?usp=sharing).
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Diagrama de relacionamento
+Segue o [link(https://dbdiagram.io/d/Wisegress-64f9d5ca02bd1c4a5e273640).
 
-## Customize configuration
+### Artigo
+/doc/artigo.pdf
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### Repositório back-end
+Segue o [link](https://github.com/gusthawojunkes/wisegress-api)
 
-## Project Setup
+## Repositório
+Este passo a passo vai te ajudar a começar a desenvolver.
+
+### Configuração Recomendada da IDE
+
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (e desative o Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+
+## Configuração Personalizada
+
+Consulte [Referência de Configuração do Vite](https://vitejs.dev/config/).
+
+## Configuração do Projeto
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compilação e Recarregamento Automático para Desenvolvimento
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Compilar e Minificar para Produção
 
 ```sh
 npm run build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Executar Testes Unitários com [Vitest](https://vitest.dev/)
 
 ```sh
 npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
