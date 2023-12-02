@@ -6,7 +6,7 @@
 Segue o [link](https://drive.google.com/file/d/1R775cwLXXTAqRhhhp6gZSysUJLNLnm65/view?usp=sharing).
 
 ### Diagrama de relacionamento
-Segue o [link(https://dbdiagram.io/d/Wisegress-64f9d5ca02bd1c4a5e273640).
+Segue o [link](https://dbdiagram.io/d/Wisegress-64f9d5ca02bd1c4a5e273640).
 
 ### Artigo
 /doc/artigo.pdf
